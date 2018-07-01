@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ProductsService from '../services/api/products'
+import ProductsTable from '../components/tables/ProductsTable'
 
-class ProductCatalog extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      products: []
-    }
+class ProductCatalog extends React.Component {
+  state = {
+    products: []
   }
 
-  allProducts () {
+  getAllProducts () {
     return ProductsService
-      .getAllProducts()
+      .getAll()
       .then(response => {
         this.setState({products: response.data})
       })
@@ -21,12 +19,16 @@ class ProductCatalog extends Component {
   }
 
   componentDidMount () {
-    this.allProducts()
+    this.getAllProducts()
   }
 
   render() {
+    const { state } = this.state
     return (
-      <div>ProductCatalog</div>
+      <div>
+        <h1>Produktový katalog</h1>
+        <ProductsTable products={this.state.products}/>
+      </div>
     )
   }
 }
