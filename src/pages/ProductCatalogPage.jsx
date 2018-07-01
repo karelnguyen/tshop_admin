@@ -23,7 +23,6 @@ class ProductCatalog extends React.Component {
   }
 
   render() {
-    const { state } = this.state
     return (
       <div>
         <h1>Produktový katalog</h1>
