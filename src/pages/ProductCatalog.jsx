@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ProductsService from '../services/api/products'
 import ProductsTable from '../components/tables/ProductsTable'
 
-class ProductCatalog extends React.Component {
-  state = {
-    products: []
+class ProductCatalog extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      products: []
+    }
   }
 
   getAllProducts () {
@@ -22,7 +25,7 @@ class ProductCatalog extends React.Component {
     this.getAllProducts()
   }
 
-  render () {
+  render() {
     return (
       <div>
         <ProductsTable />
