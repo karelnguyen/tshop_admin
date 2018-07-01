@@ -1,22 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-// import ProductCatalog from './pages/ProductCatalog'
-import Sidebar from './components/sidebars/Sidebar'
+import Drawer from './components/sidebars/Drawer'
+import Dashboard from './components/boards/Dashboard'
+import AppBar from './components/layout/Appbar'
 
 const Application = styled.div`
-  width: 100vw;
-  height: 100vh;
-  box-sizing: border-box;
+  // width: 100vw;
+  // height: 100vh;
+  // box-sizing: border-box;
+  // display: flex;
 `
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <Application>
-        <Sidebar />
+        <AppBar />
+        <Drawer />
+        <Dashboard />
       </Application>
     )
   }
 }
 
-export default App;
+export default App
