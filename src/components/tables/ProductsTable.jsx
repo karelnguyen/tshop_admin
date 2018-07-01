@@ -7,39 +7,28 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import TablePaginationActionsWrapped from '../pagination/TablePagination'
 
 class ProductsTable extends React.Component {
-  handleFirstPageButtonClick = event => {
-    this.props.onChangePage(event, 0)
+  state = {
+    page: 0,
+    rowsPerPage: 5
   }
 
-  handleBackButtonClick = event => {
-    this.props.onChangePage(event, this.props.page - 1)
+  handleChangePage = (event, page) => {
+    this.setState({ page })
   }
 
-  handleNextButtonClick = event => {
-    this.props.onChangePage(event, this.props.page + 1)
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value })
   }
 
-  handleLastPageButtonClick = event => {
-    this.props.onChangePage(
-      event,
-      Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1),
-    )
-  }
 
   render () {
-    const products = this.props.products.map(item => {
-      return (
-        <TableRow key={item.id}>
-          <TableCell>{item.id}</TableCell>
-          <TableCell>{item.heading}</TableCell>
-          <TableCell>{item.price}</TableCell>
-        </TableRow>
-      )
-    })
+    const { rowsPerPage, page } = this.state
+    const data = this.props.products
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
-    // TODO: TablePagination
     return (
       <Paper>
         <Table>
@@ -50,12 +39,32 @@ class ProductsTable extends React.Component {
               <TableCell>cena</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{products}</TableBody>
+          <TableBody>
+            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => {
+              return (
+                <TableRow key={item.id}>
+                  <TableCell>{item.id}</TableCell>
+                  <TableCell>{item.heading}</TableCell>
+                  <TableCell>{item.price}</TableCell>
+                </TableRow>
+              )
+            })}
+            {emptyRows > 0 && (
+                <TableRow style={{ height: 48 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+          </TableBody>
           <TableFooter>
-            <TableRow>
                 <TablePagination
+                  colSpan={3}
+                  count={this.props.products.length}
+                  page={page}
+                  rowsPerPage={rowsPerPage}
+                  onChangePage={this.handleChangePage}
+                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActionsWrapped}
                 />
-              </TableRow>
           </TableFooter>
         </Table>
       </Paper>
