@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
@@ -8,7 +7,9 @@ import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
-import ProductCatalog from './pages/ProductCatalog'
+import ProductCatalogPage from './pages/ProductCatalogPage'
+import AddProductPage from './pages/AddProductPage'
+import { Route, Link, Switch, Redirect } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -45,7 +46,7 @@ function App (props) {
       <AppBar position="absolute" className={classes.appBar}>
         <Toolbar>
           <Typography variant="title" color="inherit" noWrap>
-            Eshop admin
+            Eshop administrator
           </Typography>
         </Toolbar>
       </AppBar>
@@ -57,20 +58,21 @@ function App (props) {
       >
         <div className={classes.toolbar} />
         <List>
-          <ListItem>Produktový katalog</ListItem>
+          <ListItem><Link to="/product-catalog">Produktový katalog</Link></ListItem>
+          <ListItem><Link to="/add-product">Přidat produkt</Link></ListItem>
         </List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <ProductCatalog />
+        <Switch>
+          <Route path="/product-catalog" component={ProductCatalogPage} />
+          <Route path="/add-product" component={AddProductPage} />
+          <Redirect to="/" />
+        </Switch>
       </main>
     </div>
   )
-}
-
-App.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(App)

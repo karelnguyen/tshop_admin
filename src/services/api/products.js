@@ -9,15 +9,17 @@ function getAll () {
   })
 }
 
-function add (id) {
+function add (data) {
   return request({
-    url: `/p/${id}`,
-    method: 'POST'
+    url: `/p/create`,
+    method: 'POST',
+    data: data || {}
   })
 }
 
 const ProductsService = {
-  getAll
+  getAll,
+  add
 }
 
 export default ProductsService
