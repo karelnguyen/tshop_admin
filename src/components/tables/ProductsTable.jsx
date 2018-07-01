@@ -6,53 +6,31 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 
-class ProductsTable extends React.Component {
-  render() {
+function ProductsTable (props) {
+  console.log('id pdts', props.products)
+  let products = props.products.map(item => {
     return (
-      <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                item head
-              </TableCell>
-              <TableCell>
-                item head
-              </TableCell>
-              <TableCell>
-                item head
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell>
-                item body
-              </TableCell>
-              <TableCell>
-                item body
-              </TableCell>
-              <TableCell>
-                item body
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                item body
-              </TableCell>
-              <TableCell>
-                item body
-              </TableCell>
-              <TableCell>
-                item body
-              </TableCell>
-            </TableRow>
-
-          </TableBody>
-        </Table>
-      </Paper>
+      <TableRow key={item.id}>
+        <TableCell>{item.id}</TableCell>
+        <TableCell>{item.heading}</TableCell>
+        <TableCell>{item.price}</TableCell>
+      </TableRow>
     )
-  }
+  })
+  return (
+    <Paper>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>id</TableCell>
+            <TableCell>název</TableCell>
+            <TableCell>cena</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>{products}</TableBody>
+      </Table>
+    </Paper>
+  )
 }
 
 export default ProductsTable

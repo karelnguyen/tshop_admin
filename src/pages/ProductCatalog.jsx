@@ -1,13 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ProductsService from '../services/api/products'
 import ProductsTable from '../components/tables/ProductsTable'
 
-class ProductCatalog extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      products: []
-    }
+class ProductCatalog extends React.Component {
+  state = {
+    products: []
   }
 
   getAllProducts () {
@@ -26,9 +23,11 @@ class ProductCatalog extends Component {
   }
 
   render() {
+    const { state } = this.state
     return (
       <div>
-        <ProductsTable />
+        <h1>Produktový katalog</h1>
+        <ProductsTable products={this.state.products}/>
       </div>
     )
   }
