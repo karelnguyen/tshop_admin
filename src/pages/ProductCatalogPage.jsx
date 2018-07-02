@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductsService from '../services/api/products'
 import ProductsTable from '../components/tables/ProductsTable'
+import Typography from '@material-ui/core/Typography'
 
 class ProductCatalog extends React.Component {
   state = {
@@ -25,8 +26,10 @@ class ProductCatalog extends React.Component {
   render() {
     return (
       <div>
-        <h1>Produktový katalog</h1>
-        <ProductsTable products={this.state.products}/>
+        <Typography variant="display3" gutterBottom>
+          Produkt katalog
+        </Typography>
+        <ProductsTable tableData={this.state.products}/>
       </div>
     )
   }

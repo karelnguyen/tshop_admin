@@ -26,7 +26,7 @@ class ProductsTable extends React.Component {
 
   render () {
     const { rowsPerPage, page } = this.state
-    const data = this.props.products
+    const data = this.props.tableData
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
     return (
@@ -53,18 +53,20 @@ class ProductsTable extends React.Component {
                 <TableRow style={{ height: 48 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+            )}
           </TableBody>
           <TableFooter>
-                <TablePagination
-                  colSpan={3}
-                  count={this.props.products.length}
-                  page={page}
-                  rowsPerPage={rowsPerPage}
-                  onChangePage={this.handleChangePage}
-                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActionsWrapped}
-                />
+            <TableRow>
+              <TablePagination
+                colSpan={3}
+                count={data.length}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActionsWrapped}
+              />
+            </TableRow>
           </TableFooter>
         </Table>
       </Paper>

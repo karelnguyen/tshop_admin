@@ -9,6 +9,7 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ProductCatalogPage from './pages/ProductCatalogPage'
 import AddProductPage from './pages/AddProductPage'
+import Home from './pages/Home'
 import { Route, Link, Switch, Redirect } from 'react-router-dom'
 
 const drawerWidth = 240
@@ -30,12 +31,16 @@ const styles = theme => ({
     width: drawerWidth,
   },
   content: {
+    overflowY: 'scroll',
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
-    minWidth: 0, // So the Typography noWrap works
+    minWidth: 0,
   },
   toolbar: theme.mixins.toolbar,
+  link: {
+    textDecoration: 'none',
+  }
 })
 
 function App (props) {
@@ -58,14 +63,34 @@ function App (props) {
       >
         <div className={classes.toolbar} />
         <List>
-          <ListItem><Link to="/product-catalog">Produktový katalog</Link></ListItem>
-          <ListItem><Link to="/add-product">Přidat produkt</Link></ListItem>
+          <Link to="/" className={classes.link}>
+            <ListItem button>
+              <Typography variant="subheading" gutterBottom>
+                Home
+              </Typography>
+            </ListItem>
+          </Link>
+          <Link to="/product-catalog" className={classes.link}>
+            <ListItem button>
+              <Typography variant="subheading" gutterBottom>
+                Produktový katalog
+              </Typography>
+            </ListItem>
+          </Link>
+          <Link to="/add-product" className={classes.link}>
+            <ListItem button>
+              <Typography variant="subheading" gutterBottom>
+                Přidat produkt
+              </Typography>
+            </ListItem>
+          </Link>
         </List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route path="/product-catalog" component={ProductCatalogPage} />
           <Route path="/add-product" component={AddProductPage} />
           <Redirect to="/" />

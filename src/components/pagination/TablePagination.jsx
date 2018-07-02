@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import FirstPageIcon from '@material-ui/icons/FirstPage'
@@ -71,15 +70,6 @@ class TablePaginationActions extends React.Component {
       </div>
     )
   }
-}
-
-TablePaginationActions.propTypes = {
-  classes: PropTypes.object.isRequired,
-  count: PropTypes.number.isRequired,
-  onChangePage: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-  theme: PropTypes.object.isRequired,
 }
 
 const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: true })(
