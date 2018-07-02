@@ -26,7 +26,7 @@ class ProductCatalog extends React.Component {
   render() {
     return (
       <div>
-        <Typography variant="display3" gutterBottom>
+        <Typography variant="display3" gutterBottom color="primary">
           Produkt katalog
         </Typography>
         <ProductsTable tableData={this.state.products}/>

@@ -23,7 +23,6 @@ class ProductsTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value })
   }
 
-
   render () {
     const { rowsPerPage, page } = this.state
     const data = this.props.tableData
@@ -34,18 +33,20 @@ class ProductsTable extends React.Component {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>id</TableCell>
+              <TableCell>#</TableCell>
               <TableCell>název</TableCell>
               <TableCell>cena</TableCell>
+              <TableCell>id</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => {
               return (
                 <TableRow key={item.id}>
-                  <TableCell>{item.id}</TableCell>
+                  <TableCell>{data.indexOf(item) + 1}</TableCell>
                   <TableCell>{item.heading}</TableCell>
                   <TableCell>{item.price}</TableCell>
+                  <TableCell>{item._id}</TableCell>
                 </TableRow>
               )
             })}
