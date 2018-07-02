@@ -90,10 +90,10 @@ function App (props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={Home} />
           <Route path="/product-catalog" component={ProductCatalogPage} />
           <Route path="/add-product" component={AddProductPage} />
-          <Redirect to="/" />
+          <Redirect to="/home" />
         </Switch>
       </main>
     </div>

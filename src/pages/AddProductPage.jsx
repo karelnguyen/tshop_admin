@@ -11,14 +11,17 @@ import Grid from '@material-ui/core/Grid'
 
 const styles = theme => ({
   paper: {
-    padding: '20px'
+    padding: '20px',
+    paddingBot: '40px'
   },
   input: {
-    margin: '5px',
-    width: '150px'
+    margin: '5px'
   },
   btn: {
-    marginLeft: '40px'
+    marginLeft: '60px',
+    width: '70px',
+    height: '70px',
+    marginTop: '20px'
   }
 })
 
@@ -32,7 +35,7 @@ class AddProductPage extends React.Component {
     return ProductsService
       .getAll()
       .then(response => {
-        this.setState({allProducts: response.data})
+        this.setState({ allProducts: response.data })
       })
   }
 
@@ -42,10 +45,9 @@ class AddProductPage extends React.Component {
 
     let idArr = []
     let data = this.state.input
-    this.state.allProducts.map(x => x.hasOwnProperty('id') ? idArr.push(x.id) : x)
+    this.state.allProducts.map( x => x.hasOwnProperty('id') ? idArr.push(x.id) : x )
     idArr = idArr.map(id => Number(id))
     let id = isFinite(Math.max(...idArr) + 1) ? Math.max(...idArr) + 1 : 1
-
     data['id'] = id
 
     return ProductsService
@@ -69,12 +71,12 @@ class AddProductPage extends React.Component {
 
     return (
       <div>
-        <Typography variant="display3" gutterBottom>
+        <Typography variant="display3" gutterBottom color="primary">
           Přidat produkt
         </Typography>
         <Grid container >
           <Paper className={classes.paper}>
-            <Typography variant="body2" gutterBottom>
+            <Typography variant="body2" gutterBottom color="primary">
               Zadejte hodnoty
             </Typography>
             <TextField
@@ -84,6 +86,9 @@ class AddProductPage extends React.Component {
               margin="normal"
               className={classes.input}
               onChange={this.saveInputData.bind(this)}
+              required={true}
+              multiline={true}
+              error={false}
             />
             <TextField
               id="shortText"
@@ -92,6 +97,7 @@ class AddProductPage extends React.Component {
               margin="normal"
               className={classes.input}
               onChange={this.saveInputData.bind(this)}
+              fullWidth={true}
             />
             <TextField
               id="longText"
@@ -100,6 +106,7 @@ class AddProductPage extends React.Component {
               margin="normal"
               className={classes.input}
               onChange={this.saveInputData.bind(this)}
+              fullWidth={true}
             />
             <TextField
               id="size"
@@ -125,10 +132,12 @@ class AddProductPage extends React.Component {
               className={classes.input}
               onChange={this.saveInputData.bind(this)}
             />
-            <Tooltip id="tooltip-fab" title="Add" className={classes.btn}>
-              <Button variant="fab" color="primary" aria-label="Add" onClick={this.addProduct.bind(this)}>
-                <AddIcon/>
-              </Button>
+            <Tooltip id="tooltip-fab" title="Add" >
+              <span>
+                <Button className={classes.btn} variant="fab" color="primary" aria-label="Add" disabled={false} onClick={this.addProduct.bind(this)}>
+                  <AddIcon/>
+                </Button>
+              </span>
             </Tooltip>
           </Paper>
         </Grid>
