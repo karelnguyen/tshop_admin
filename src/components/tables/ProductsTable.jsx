@@ -12,7 +12,8 @@ import TablePaginationActionsWrapped from '../pagination/TablePagination'
 class ProductsTable extends React.Component {
   state = {
     page: 0,
-    rowsPerPage: 5
+    rowsPerPage: 5,
+    tableNumber: 0
   }
 
   handleChangePage = (event, page) => {
@@ -23,9 +24,8 @@ class ProductsTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value })
   }
 
-
   render () {
-    const { rowsPerPage, page } = this.state
+    const { rowsPerPage, page, tableNumber } = this.state
     const data = this.props.tableData
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
@@ -34,6 +34,7 @@ class ProductsTable extends React.Component {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell>cislo</TableCell>
               <TableCell>id</TableCell>
               <TableCell>název</TableCell>
               <TableCell>cena</TableCell>
@@ -43,6 +44,7 @@ class ProductsTable extends React.Component {
             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => {
               return (
                 <TableRow key={item.id}>
+                  <TableCell>{tableNumber}</TableCell>
                   <TableCell>{item.id}</TableCell>
                   <TableCell>{item.heading}</TableCell>
                   <TableCell>{item.price}</TableCell>
