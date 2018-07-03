@@ -46,13 +46,13 @@ class ProductsTable extends React.Component {
                   <TableCell>{data.indexOf(item) + 1}</TableCell>
                   <TableCell>{item.heading}</TableCell>
                   <TableCell>{item.price}</TableCell>
-                  <TableCell>{item._id}</TableCell>
+                  <TableCell>{item.id}</TableCell>
                 </TableRow>
               )
             })}
             {emptyRows > 0 && (
                 <TableRow style={{ height: 48 * emptyRows }}>
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={6}></TableCell>
                 </TableRow>
             )}
           </TableBody>
