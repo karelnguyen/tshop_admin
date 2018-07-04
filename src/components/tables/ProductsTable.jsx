@@ -37,6 +37,7 @@ class ProductsTable extends React.Component {
               <TableCell>název</TableCell>
               <TableCell>cena</TableCell>
               <TableCell>id</TableCell>
+              <TableCell>upravit / smazat</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -47,6 +48,7 @@ class ProductsTable extends React.Component {
                   <TableCell>{item.heading}</TableCell>
                   <TableCell>{item.price}</TableCell>
                   <TableCell>{item.id}</TableCell>
+                  <TableCell>functions</TableCell>
                 </TableRow>
               )
             })}
