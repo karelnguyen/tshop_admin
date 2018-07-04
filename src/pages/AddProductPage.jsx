@@ -67,11 +67,6 @@ class AddProductPage extends React.Component {
       })
   }
 
-  // TODO: enable addButton
-  // toggleDisabledButton () {
-  //   this.state.validation.length === 0 ? this.setState({ addButton: false }) : this.setState({ addButton: true })
-  // }
-
   async addProduct () {
     await this.getAllProducts()
 
@@ -100,6 +95,14 @@ class AddProductPage extends React.Component {
       this.setState({ validation: errorData })
     } else {
       this.setState({ validation: {} })
+    }
+
+    let objSize = Object.keys(data).length
+    let objVal = Object.keys(this.state.validation).length
+    if (objSize === 7 && objVal === 0) {
+      this.setState({ addButton: false })
+    } else {
+      this.setState({ addButton: true })
     }
   }
 
@@ -198,7 +201,6 @@ class AddProductPage extends React.Component {
               className={classes.input}
               onChange={this.saveInputData.bind(this)}
               required={true}
-              type="number"
               error={this.state.validation.price}
             />
             <Tooltip id="tooltip-fab" title="Add" >
