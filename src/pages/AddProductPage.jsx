@@ -79,7 +79,9 @@ class AddProductPage extends React.Component {
 
     return ProductsService
       .add(data)
-      .then(window.location.reload())
+      .then(() => {
+        window.location.reload()
+      })
       .catch(err => {
         console.log('Error', err)
       })
@@ -125,7 +127,7 @@ class AddProductPage extends React.Component {
           Přidat produkt
         </Typography>
         <Grid container >
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={4}>
             <Typography variant="body2" gutterBottom color="primary">
               Zadejte hodnoty
             </Typography>
@@ -139,6 +141,7 @@ class AddProductPage extends React.Component {
               required={true}
               multiline={true}
               error={this.state.validation.heading}
+              value={this.state.input.heading}
             />
             <TextField
               id="size"
