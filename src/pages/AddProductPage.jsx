@@ -79,6 +79,9 @@ class AddProductPage extends React.Component {
 
     return ProductsService
       .add(data)
+      .then(() => {
+        window.location.reload()
+      })
       .catch(err => {
         console.log('Error', err)
       })
@@ -88,7 +91,7 @@ class AddProductPage extends React.Component {
     let data = this.state.input
     data[event.target.id] = event.target.value
     this.setState({ input: data })
-
+    // Validator is set to exact patterns for each input. Adding inputs also require adding additional patterns
     if (Validation.testReg(event.target.id, event.target.value) === false) {
       let errorData = this.state.validation
       errorData[event.target.id] = true
@@ -96,8 +99,12 @@ class AddProductPage extends React.Component {
     } else {
       this.setState({ validation: {} })
     }
+    return this.toggleAddButton()
+  }
 
-    let objSize = Object.keys(data).length
+  toggleAddButton () {
+    // Change when data model/schema change. Also the RegExp will need to be updated due to exact patterns for each entry input. (toggle button)
+    let objSize = Object.keys(this.state.input).length
     let objVal = Object.keys(this.state.validation).length
     if (objSize === 7 && objVal === 0) {
       this.setState({ addButton: false })
@@ -120,7 +127,7 @@ class AddProductPage extends React.Component {
           Přidat produkt
         </Typography>
         <Grid container >
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={4}>
             <Typography variant="body2" gutterBottom color="primary">
               Zadejte hodnoty
             </Typography>
@@ -134,6 +141,7 @@ class AddProductPage extends React.Component {
               required={true}
               multiline={true}
               error={this.state.validation.heading}
+              value={this.state.input.heading}
             />
             <TextField
               id="size"
