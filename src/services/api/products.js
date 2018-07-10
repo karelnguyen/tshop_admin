@@ -31,10 +31,11 @@ function getImage (img) {
   })
 }
 
-function update (id) {
+function update (id, data) {
   return request({
     url: `/product/update/${id}`,
-    method: 'PUT'
+    method: 'PUT',
+    data: data || {}
   })
 }
 

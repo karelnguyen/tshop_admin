@@ -215,9 +215,10 @@ class AddProductPage extends React.Component {
               <span>
                 <Button
                   className={classes.btn}
+                  type="button"
                   variant="fab"
                   color="primary"
-                  aria-label="Add"
+                  aria-label="Přidat"
                   disabled={this.state.addButton}
                   onClick={this.addProduct.bind(this)}>
                   <AddIcon/>

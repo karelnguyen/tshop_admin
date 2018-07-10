@@ -51,7 +51,6 @@ function App (props) {
       <AppBar position="absolute" className={classes.appBar}>
         <Toolbar>
           <Typography variant="title" color="inherit" noWrap>
-            Eshop administrator
           </Typography>
         </Toolbar>
       </AppBar>

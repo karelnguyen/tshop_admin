@@ -13,17 +13,12 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import TablePaginationActionsWrapped from '../pagination/TablePagination'
-import UpdateIcon from '../../assets/border-color.png'
 import ProductsService from '../../services/api/products'
+import UpdateProductDialog from '../dialogs/UpdateProductDialog'
 
 const styles = theme => ({
   noData: {
     marginTop: '70px'
-  },
-  icon: {
-    width: '29px',
-    height: '29px',
-    marginTop: '5px'
   },
   btnDel: {
     marginLeft: '10px'
@@ -57,6 +52,14 @@ class ProductsTable extends React.Component {
       .catch(err => {
         console.log('ERR!', err)
       })
+  }
+
+  openDialog () {
+    this.setState({ updateProductDialogBool: true })
+  }
+
+  closeDialog () {
+    this.setState({ updateProductDialogBool: false })
   }
 
   render () {
@@ -94,28 +97,22 @@ class ProductsTable extends React.Component {
                        <TableCell>{item.price}</TableCell>
                        <TableCell>{item.id}</TableCell>
                        <TableCell>
-                         <Tooltip id="tooltip-fab" title="Upravit" >
-                           <Button
-                             variant="fab"
-                             color="primary"
-                             aria-label="Update"
-                             >
-                             <img className={classes.icon} src={UpdateIcon} alt="uptade btn"/>
-                           </Button>
-                         </Tooltip>
-                         <Tooltip id="tooltip-fab" title="Smazat" >
-                           <Button
-                             variant="fab"
-                             color="secondary"
-                             aria-label="Update"
-                             className={classes.btnDel}
-                             onClick={() => {
-                               this.deleteProduct(item.id)
-                             }}
-                             >
-                             <DeleteIcon />
-                           </Button>
-                         </Tooltip>
+                         <Grid container direction="row">
+                           <UpdateProductDialog tableData={item}/>
+                           <Tooltip id="tooltip-fab" title="Smazat" >
+                             <Button
+                               variant="fab"
+                               color="secondary"
+                               aria-label="Update"
+                               className={classes.btnDel}
+                               onClick={() => {
+                                 this.deleteProduct(item.id)
+                               }}
+                               >
+                               <DeleteIcon />
+                             </Button>
+                           </Tooltip>
+                         </Grid>
                        </TableCell>
                      </TableRow>
                    )
