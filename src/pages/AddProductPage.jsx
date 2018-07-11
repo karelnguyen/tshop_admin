@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductsService from '../services/api/products'
-import Validation from '../mixins/validation'
+import Validator from '../mixins/validation'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import AddIcon from '@material-ui/icons/Add'
@@ -92,7 +92,7 @@ class AddProductPage extends React.Component {
     data[event.target.id] = event.target.value
     this.setState({ input: data })
     // Validator is set to exact patterns for each input. Adding inputs also require adding additional patterns
-    if (Validation.testReg(event.target.id, event.target.value) === false) {
+    if (Validator.testReg(event.target.id, event.target.value) === false) {
       let errorData = this.state.validation
       errorData[event.target.id] = true
       this.setState({ validation: errorData })

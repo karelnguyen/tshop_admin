@@ -9,6 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Tooltip from '@material-ui/core/Tooltip'
 import { withStyles } from '@material-ui/core/styles'
 import UpdateIcon from '../../assets/border-color.png'
+import ProductsService from '../../services/api/products'
+import Validator from '../../mixins/validation'
 
 const styles = theme => ({
   icon: {
@@ -21,6 +23,9 @@ const styles = theme => ({
 class UpdateProductDialog extends React.Component {
   state = {
     open: false,
+    input: this.props.tableData,
+    validation: {},
+    updateBtnBool: true
   }
 
   handleClickOpen = () => {
@@ -31,9 +36,46 @@ class UpdateProductDialog extends React.Component {
     this.setState({ open: false })
   }
 
+  saveInputData (event) {
+    let data = this.state.input
+    data[event.target.id] = event.target.value
+    this.setState({ input: data })
+    // Validator is set to exact patterns for each input. Adding inputs also require adding additional patterns
+    if (Validator.testReg(event.target.id, event.target.value) === false) {
+      let errorData = this.state.validation
+      errorData[event.target.id] = true
+      this.setState({ validation: errorData })
+    } else {
+      this.setState({ validation: {} })
+    }
+    return this.toggleAddButton()
+  }
+
+  toggleAddButton () {
+    // Change when data model/schema change. Also the RegExp will need to be updated due to exact patterns for each entry input. (toggle button)
+    let objSize = Object.keys(this.state.input).length
+    let objVal = Object.keys(this.state.validation).length
+    if (objSize === 11 && objVal === 0) {
+      this.setState({ updateBtnBool: false })
+    } else {
+      this.setState({ updateBtnBool: true })
+    }
+  }
+
+  updateProduct (id) {
+    let data = this.state.input
+    return ProductsService
+      .update(id, data)
+      .then(() => {
+        window.location.reload()
+      })
+      .catch(err => {
+        console.log('Error', err)
+      })
+  }
+
   render () {
     const { classes, tableData } = this.props
-    console.log(this.props)
     return (
       <div>
         <Tooltip id="tooltip-fab" title="Upravit" >
@@ -54,44 +96,75 @@ class UpdateProductDialog extends React.Component {
          <DialogTitle id="form-dialog-title">Upravit produkt</DialogTitle>
          <DialogContent>
            <DialogContentText>
-             To subscribe to this website, please enter your email address here. We will send
-             updates occasionally.
+             Update product, all fields are required.
            </DialogContentText>
+           <TextField
+             id="id"
+             disabled={true}
+             margin="dense"
+             label="Product id"
+             defaultValue={tableData.id}
+
+             onChange={this.saveInputData.bind(this)}
+             fullWidth
+             />
            <TextField
              autoFocus
              margin="dense"
              id="heading"
              label="Product name"
-             type="text"
-             value={tableData.heading}
+             defaultValue={tableData.heading}
+             onChange={this.saveInputData.bind(this)}
              fullWidth
            />
            <TextField
-             value={tableData.id}
+             id="color"
+             margin="dense"
+             label="Color"
+             defaultValue={tableData.color}
+             onChange={this.saveInputData.bind(this)}
              fullWidth
            />
            <TextField
-             value={tableData.color}
+             id="img"
+             margin="dense"
+             label="Img"
+             defaultValue={tableData.img}
+             onChange={this.saveInputData.bind(this)}
              fullWidth
            />
            <TextField
-             value={tableData.img}
+             id="shortText"
+             margin="dense"
+             label="Short text"
+             defaultValue={tableData.shortText}
+             onChange={this.saveInputData.bind(this)}
              fullWidth
            />
            <TextField
-             value={tableData.longText}
+             id="longText"
+             margin="dense"
+             label="Long text"
+             defaultValue={tableData.longText}
+             onChange={this.saveInputData.bind(this)}
              fullWidth
            />
            <TextField
-             value={tableData.shortText}
+             id="size"
+             margin="dense"
+             label="Size"
+             defaultValue={tableData.size}
+             onChange={this.saveInputData.bind(this)}
+             error={this.state.validation.price}
              fullWidth
            />
            <TextField
-             value={tableData.size}
-             fullWidth
-           />
-           <TextField
-             value={tableData.price}
+             id="price"
+             margin="dense"
+             label="Price"
+             defaultValue={tableData.price}
+             onChange={this.saveInputData.bind(this)}
+             error={this.state.validation.price}
              fullWidth
            />
          </DialogContent>
@@ -99,8 +172,8 @@ class UpdateProductDialog extends React.Component {
            <Button onClick={this.handleClose} color="primary">
              Cancel
            </Button>
-           <Button onClick={this.handleClose} color="primary">
-             Subscribe
+           <Button onClick={() => this.updateProduct(tableData.id)} color="primary" disabled={this.state.updateBtnBool}>
+             Update
            </Button>
          </DialogActions>
        </Dialog>
