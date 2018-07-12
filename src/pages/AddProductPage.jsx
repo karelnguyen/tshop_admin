@@ -211,7 +211,7 @@ class AddProductPage extends React.Component {
               required={true}
               error={this.state.validation.price}
             />
-            <Tooltip id="tooltip-fab" title="Add" >
+            <Tooltip id="tooltip-fab" title="Add">
               <span>
                 <Button
                   className={classes.btn}
