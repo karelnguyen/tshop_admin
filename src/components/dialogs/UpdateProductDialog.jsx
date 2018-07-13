@@ -1,4 +1,8 @@
 import React from 'react'
+import UpdateIcon from '../../assets/border-color.png'
+import ProductsService from '../../services/api/products'
+import Validator from '../../mixins/validation'
+// Material-ui
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
@@ -7,16 +11,21 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Tooltip from '@material-ui/core/Tooltip'
-import { withStyles } from '@material-ui/core/styles'
-import UpdateIcon from '../../assets/border-color.png'
-import ProductsService from '../../services/api/products'
-import Validator from '../../mixins/validation'
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import amber from '@material-ui/core/colors/amber'
+
+// Custom UI theme
+const theme = createMuiTheme({
+  palette: {
+    secondary: amber
+  }
+})
 
 const styles = theme => ({
   icon: {
     width: '29px',
     height: '29px',
-    marginTop: '5px'
+    marginTop: '7px'
   }
 })
 
@@ -46,19 +55,29 @@ class UpdateProductDialog extends React.Component {
       errorData[event.target.id] = true
       this.setState({ validation: errorData })
     } else {
-      this.setState({ validation: {} })
+      let errorData = this.state.validation
+      errorData[event.target.id] = false
+      this.setState({ validation: errorData })
     }
     return this.toggleAddButton()
   }
 
+
   toggleAddButton () {
-    // Change when data model/schema change. Also the RegExp will need to be updated due to exact patterns for each entry input. (toggle button)
-    let objSize = Object.keys(this.state.input).length
-    let objVal = Object.keys(this.state.validation).length
-    if (objSize === 11 && objVal === 0) {
-      this.setState({ updateBtnBool: false })
+    const data = this.state.validation
+    let toggleAddButtonBool = true
+    for (let i in data) {
+      if (data[i] === true) {
+        toggleAddButtonBool = false
+      } else {
+        toggleAddButtonBool = true
+      }
+    }
+
+    if (toggleAddButtonBool === false) {
+      this.setState({ updateBtnBool: true})
     } else {
-      this.setState({ updateBtnBool: true })
+      this.setState({ updateBtnBool: false})
     }
   }
 
@@ -78,21 +97,23 @@ class UpdateProductDialog extends React.Component {
     const { classes, tableData } = this.props
     return (
       <div>
-        <Tooltip id="tooltip-fab" title="Upravit" >
-          <Button
-            variant="fab"
-            color="primary"
-            aria-label="Update"
-            onClick={this.handleClickOpen}
-            >
-            <img className={classes.icon} src={UpdateIcon} alt="uptade btn"/>
-          </Button>
-        </Tooltip>
-         <Dialog
-           open={this.state.open}
-           onClose={this.handleClose}
-           aria-labelledby="form-dialog-title"
-         >
+        <MuiThemeProvider theme={theme}>
+          <Tooltip id="tooltip-fab" title="Upravit" >
+              <Button
+                variant="fab"
+                color='secondary'
+                aria-label="Update"
+                onClick={this.handleClickOpen}
+                >
+                <img className={classes.icon} src={UpdateIcon} alt="uptade btn"/>
+              </Button>
+          </Tooltip>
+        </MuiThemeProvider>
+       <Dialog
+         open={this.state.open}
+         onClose={this.handleClose}
+         aria-labelledby="form-dialog-title"
+       >
          <DialogTitle id="form-dialog-title">Upravit produkt</DialogTitle>
          <DialogContent>
            <DialogContentText>
@@ -104,7 +125,6 @@ class UpdateProductDialog extends React.Component {
              margin="dense"
              label="Product id"
              defaultValue={tableData.id}
-
              onChange={this.saveInputData.bind(this)}
              fullWidth
              />
@@ -115,6 +135,7 @@ class UpdateProductDialog extends React.Component {
              label="Product name"
              defaultValue={tableData.heading}
              onChange={this.saveInputData.bind(this)}
+             error={this.state.validation.heading}
              fullWidth
            />
            <TextField
@@ -123,6 +144,7 @@ class UpdateProductDialog extends React.Component {
              label="Color"
              defaultValue={tableData.color}
              onChange={this.saveInputData.bind(this)}
+             error={this.state.validation.color}
              fullWidth
            />
            <TextField
@@ -139,6 +161,7 @@ class UpdateProductDialog extends React.Component {
              label="Short text"
              defaultValue={tableData.shortText}
              onChange={this.saveInputData.bind(this)}
+             error={this.state.validation.shortText}
              fullWidth
            />
            <TextField
@@ -147,6 +170,7 @@ class UpdateProductDialog extends React.Component {
              label="Long text"
              defaultValue={tableData.longText}
              onChange={this.saveInputData.bind(this)}
+             error={this.state.validation.longText}
              fullWidth
            />
            <TextField
@@ -155,7 +179,7 @@ class UpdateProductDialog extends React.Component {
              label="Size"
              defaultValue={tableData.size}
              onChange={this.saveInputData.bind(this)}
-             error={this.state.validation.price}
+             error={this.state.validation.size}
              fullWidth
            />
            <TextField

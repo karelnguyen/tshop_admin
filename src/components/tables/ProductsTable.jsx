@@ -2,6 +2,7 @@ import React from 'react'
 import TablePaginationActionsWrapped from '../pagination/TablePagination'
 import UpdateProductDialog from '../dialogs/UpdateProductDialog'
 import DeleteProductDialog from '../dialogs/DeleteProductDialog'
+import ProductDetailDialog from '../dialogs/ProductDetailDialog'
 // Material-ui
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -16,15 +17,25 @@ import Typography from '@material-ui/core/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const styles = theme => ({
   noData: {
-    marginTop: '70px'
+    minHeight: '200px'
   },
   noDataDiv: {
     padding: '40px'
   },
+  tableRow: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
+  updateBtn: {
+    marginLeft: '10px',
+    marginRight: '10px'
+  }
 })
 
 class ProductsTable extends React.Component {
@@ -32,7 +43,8 @@ class ProductsTable extends React.Component {
     page: 0,
     rowsPerPage: 5,
     selected: [],
-    tableData: this.props.tableData
+    tableData: this.props.tableData,
+    productDetailBool: false
   }
 
   handleChangePage (event, page) {
@@ -80,98 +92,96 @@ class ProductsTable extends React.Component {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
     const { classes } = this.props
     return (
-      <Grid container justify="flex-start">
-        <Toolbar>
-          {selected.length > 0
-            ?
-              <Button
-                variant="raised"
-                color="secondary"
-                aria-label="Delete"
-                >Smazat</Button>
-            :
-            <div></div>
-          }
-        </Toolbar>
-        {data.length === 0
-            ?
-            <Grid item className={classes.noData}>
-              <Typography variant="display1" gutterBottom color="textSecondary">
-                Žádná data
-              </Typography>
-            </Grid>
-            :
-            <Table>
-               <TableHead>
-                 <TableRow>
-                   <TableCell padding="checkbox">
-                     <Tooltip id="tooltip-fab" title="Vše">
-                       <Checkbox
-                          indeterminate={selected.length > 0 && selected.length < data.length}
-                          checked={selected.length === data.length}
-                          onChange={this.handleSelectAllClick.bind(this)}
-                        />
-                     </Tooltip>
-                   </TableCell>
-                   <TableCell>#</TableCell>
-                   <TableCell>název</TableCell>
-                   <TableCell>id</TableCell>
-                   <TableCell>cena</TableCell>
-                   <TableCell>upravit / smazat</TableCell>
-                 </TableRow>
-               </TableHead>
-               <TableBody>
-                 {data
-                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                   .map(item => {
-                     const isSelected = this.isSelected(item.id)
-                   return (
-                     <TableRow
-                       key={item.id}
-                       role="checkbox"
-                       onClick={event => this.handleClick(event, item.id)}
-                       aria-checked={isSelected}
-                       tabIndex={-1}
-                       selected={isSelected}
-                       >
-                       <TableCell padding="checkbox">
-                         <Checkbox checked={isSelected}/>
-                       </TableCell>
-                       <TableCell>{data.indexOf(item) + 1}</TableCell>
-                       <TableCell>{item.heading}</TableCell>
-                       <TableCell>{item.id}</TableCell>
-                       <TableCell>{item.price}</TableCell>
-                       <TableCell>
-                         <Grid container direction="row">
-                           <UpdateProductDialog tableData={item}/>
-                           <DeleteProductDialog tableData={item}/>
-                         </Grid>
-                       </TableCell>
+      <Paper>
+          {data.length === 0
+              ?
+              <Grid container className={classes.noData} justify="center" alignItems="center">
+                <Typography variant="display1" gutterBottom color="textSecondary">
+                  Žádná data
+                </Typography>
+              </Grid>
+              :
+              <Grid container justify="flex-start">
+                <Toolbar>
+                  <Button
+                    variant="raised"
+                    color="secondary"
+                    aria-label="Delete"
+                    disabled={selected.length === 0}
+                    >Smazat
+                  </Button>
+                </Toolbar>
+                <Table>
+                 <TableHead>
+                   <TableRow>
+                     <TableCell padding="checkbox">
+                       <Tooltip id="tooltip-fab" title="Vše">
+                         <Checkbox
+                            indeterminate={selected.length > 0 && selected.length < data.length}
+                            checked={selected.length === data.length}
+                            onChange={this.handleSelectAllClick.bind(this)}
+                          />
+                       </Tooltip>
+                     </TableCell>
+                     <TableCell>#</TableCell>
+                     <TableCell>název</TableCell>
+                     <TableCell>id</TableCell>
+                     <TableCell>cena</TableCell>
+                     <TableCell>zobrazit / upravit / smazat</TableCell>
+                   </TableRow>
+                 </TableHead>
+                 <TableBody>
+                   {data
+                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                     .map(item => {
+                       const isSelected = this.isSelected(item.id)
+                       return (
+                         <TableRow
+                          key={item.id}
+                          >
+                           <TableCell padding="checkbox">
+                             <Checkbox
+                               onClick={event => this.handleClick(event, item.id)}
+                               checked={isSelected}/>
+                           </TableCell>
+                           <TableCell>{data.indexOf(item) + 1}</TableCell>
+                           <TableCell>{item.heading}</TableCell>
+                           <TableCell>{item.id}</TableCell>
+                           <TableCell>{item.price}</TableCell>
+                           <TableCell>
+                             <Grid container direction="row">
+                               <ProductDetailDialog id={item.id}/>
+                               <span className={classes.updateBtn}>
+                                 <UpdateProductDialog tableData={item} />
+                               </span>
+                               <DeleteProductDialog tableData={item}/>
+                             </Grid>
+                           </TableCell>
+                         </TableRow>
+                     )
+                   })}
+                   {emptyRows > 0 && (
+                       <TableRow style={{ height: 48 * emptyRows }}>
+                         <TableCell colSpan={6}></TableCell>
+                       </TableRow>
+                   )}
+                 </TableBody>
+                   <TableFooter>
+                     <TableRow>
+                       <TablePagination
+                         count={data.length}
+                         page={page}
+                         rowsPerPage={rowsPerPage}
+                         onChangePage={this.handleChangePage}
+                         onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                         ActionsComponent={TablePaginationActionsWrapped}
+                         />
                      </TableRow>
-                   )
-                 })}
-                 {emptyRows > 0 && (
-                     <TableRow style={{ height: 48 * emptyRows }}>
-                       <TableCell colSpan={6}></TableCell>
-                     </TableRow>
-                 )}
-               </TableBody>
-               <TableFooter>
-                 <TableRow>
-                   <TablePagination
-                     colSpan={3}
-                     count={data.length}
-                     page={page}
-                     rowsPerPage={rowsPerPage}
-                     onChangePage={this.handleChangePage}
-                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                     ActionsComponent={TablePaginationActionsWrapped}
-                   />
-                 </TableRow>
-               </TableFooter>
-             </Table>
-          }
-      </Grid>
+                   </TableFooter>
+               </Table>
+        </Grid>
+      }
+      </Paper>
     )
   }
 }
