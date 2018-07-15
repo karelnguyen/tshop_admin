@@ -1,9 +1,10 @@
 import React from 'react'
+import ProductsService from '../../services/api/products'
+// Material-ui
 import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { withStyles } from '@material-ui/core/styles'
-import ProductsService from '../../services/api/products'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -11,9 +12,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 const styles = theme => ({
-  btnDel: {
-    marginLeft: '10px'
-  }
+// styles
 })
 
 class UpdateProductDialog extends React.Component {
@@ -41,7 +40,7 @@ class UpdateProductDialog extends React.Component {
   }
 
   render () {
-    const { tableData, classes } = this.props
+    const { tableData } = this.props
     return (
       <div>
         <Tooltip id="tooltip-fab" title="Smazat" >
@@ -50,7 +49,6 @@ class UpdateProductDialog extends React.Component {
             color="secondary"
             aria-label="Delete"
             onClick={this.handleClickOpen}
-            className={classes.btnDel}
             >
             <DeleteIcon />
           </Button>

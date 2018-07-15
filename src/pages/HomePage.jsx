@@ -3,9 +3,12 @@ import Typography from '@material-ui/core/Typography'
 
 function Home () {
   return (
-    <Typography variant="display3" gutterBottom color="primary">
-      Home
-    </Typography>
+    <div>
+      <Typography variant="display3" gutterBottom color="primary">
+        Home
+      </Typography>
+
+    </div>
   )
 }
 

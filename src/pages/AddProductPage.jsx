@@ -14,13 +14,14 @@ import MenuItem from '@material-ui/core/MenuItem'
 const styles = theme => ({
   paper: {
     padding: '20px',
-    paddingBot: '40px'
+    paddingBot: '40px',
+    width: '50vw'
   },
   input: {
     margin: '5px'
   },
   btn: {
-    marginLeft: '60px',
+    marginLeft: '150px',
     width: '70px',
     height: '70px',
     marginTop: '20px'

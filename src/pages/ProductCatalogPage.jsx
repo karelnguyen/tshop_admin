@@ -12,7 +12,7 @@ class ProductCatalog extends React.Component {
     return ProductsService
       .getAll()
       .then(response => {
-        this.setState({products: response.data})
+        this.setState({ products: response.data })
       })
       .catch(err => {
         console.error('Err!', err)
@@ -24,12 +24,13 @@ class ProductCatalog extends React.Component {
   }
 
   render() {
+    const { products } = this.state
     return (
       <div>
         <Typography variant="display3" gutterBottom color="primary">
           Produkt katalog
         </Typography>
-        <ProductsTable tableData={this.state.products}/>
+        <ProductsTable tableData={products}/>
       </div>
     )
   }
