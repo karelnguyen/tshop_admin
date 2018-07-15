@@ -3,6 +3,7 @@ import TablePaginationActionsWrapped from '../pagination/TablePagination'
 import UpdateProductDialog from '../dialogs/UpdateProductDialog'
 import DeleteProductDialog from '../dialogs/DeleteProductDialog'
 import ProductDetailDialog from '../dialogs/ProductDetailDialog'
+import ProductsService from '../../services/api/products'
 // Material-ui
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -22,7 +23,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 
 const styles = theme => ({
   noData: {
-    minHeight: '200px'
+    minHeight: '200px',
+    width: '70vw'
   },
   noDataDiv: {
     padding: '40px'
@@ -86,6 +88,19 @@ class ProductsTable extends React.Component {
 
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
+  deleteSelectedProducts () {
+    let data = this.state.selected
+    let iterCounter = 0
+    data.map(x => {
+      return ProductsService.destroy(x).then(() => {
+        iterCounter++
+        if (iterCounter === data.length) {
+          window.location.reload()
+        }
+      })
+    })
+  }
+
   render () {
     const { rowsPerPage, page, selected } = this.state
     const data = this.props.tableData
@@ -101,12 +116,13 @@ class ProductsTable extends React.Component {
                 </Typography>
               </Grid>
               :
-              <Grid container justify="flex-start">
+              <Grid container justify="flex-start" className={classes.noData}>
                 <Toolbar>
                   <Button
                     variant="raised"
                     color="secondary"
                     aria-label="Delete"
+                    onClick={this.deleteSelectedProducts.bind(this)}
                     disabled={selected.length === 0}
                     >Smazat
                   </Button>
@@ -127,6 +143,7 @@ class ProductsTable extends React.Component {
                      <TableCell>název</TableCell>
                      <TableCell>id</TableCell>
                      <TableCell>cena</TableCell>
+                     <TableCell>barva</TableCell>
                      <TableCell>zobrazit / upravit / smazat</TableCell>
                    </TableRow>
                  </TableHead>
@@ -148,6 +165,7 @@ class ProductsTable extends React.Component {
                            <TableCell>{item.heading}</TableCell>
                            <TableCell>{item.id}</TableCell>
                            <TableCell>{item.price}</TableCell>
+                           <TableCell>{item.color}</TableCell>
                            <TableCell>
                              <Grid container direction="row">
                                <ProductDetailDialog id={item.id}/>

@@ -1,18 +1,15 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import Drawer from '@material-ui/core/Drawer'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import List from '@material-ui/core/List'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import ListItem from '@material-ui/core/ListItem'
 import ProductCatalogPage from './pages/ProductCatalogPage'
 import AddProductPage from './pages/AddProductPage'
-import Home from './pages/Home'
-import { Route, Link, Switch, Redirect } from 'react-router-dom'
-
-const drawerWidth = 240
+import HomePage from './pages/HomePage'
+import { Route, Switch, Redirect } from 'react-router-dom'
+// Material-ui
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import MainDrawer from './components/drawers/Drawer'
+import Grid from '@material-ui/core/Grid'
 
 const styles = theme => ({
   root: {
@@ -23,13 +20,6 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  drawerPaper: {
-    position: 'relative',
-    width: drawerWidth,
-  },
   content: {
     overflowY: 'scroll',
     flexGrow: 1,
@@ -38,65 +28,39 @@ const styles = theme => ({
     minWidth: 0,
   },
   toolbar: theme.mixins.toolbar,
-  link: {
-    textDecoration: 'none',
+  title: {
+    marginLeft: '50px'
   }
 })
 
-function App (props) {
-  const { classes } = props
+class App extends React.Component {
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="absolute" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="title" color="inherit" noWrap>
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.toolbar} />
-        <List>
-          <Link to="/" className={classes.link}>
-            <ListItem button>
-              <Typography variant="subheading" gutterBottom>
-                Home
+  render () {
+    const { classes } = this.props
+    return (
+      <div className={classes.root}>
+        <main className={classes.content}>
+          <AppBar position="absolute" className={classes.appBar}>
+            <Toolbar>
+              <MainDrawer />
+              <Typography variant="title" color="inherit" noWrap className={classes.title}>
+                TSHOP
               </Typography>
-            </ListItem>
-          </Link>
-          <Link to="/product-catalog" className={classes.link}>
-            <ListItem button>
-              <Typography variant="subheading" gutterBottom>
-                Produktový katalog
-              </Typography>
-            </ListItem>
-          </Link>
-          <Link to="/add-product" className={classes.link}>
-            <ListItem button>
-              <Typography variant="subheading" gutterBottom>
-                Přidat produkt
-              </Typography>
-            </ListItem>
-          </Link>
-        </List>
-        <Divider />
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Switch>
-          <Route exact path="/home" component={Home} />
-          <Route path="/product-catalog" component={ProductCatalogPage} />
-          <Route path="/add-product" component={AddProductPage} />
-          <Redirect to="/home" />
-        </Switch>
-      </main>
-    </div>
-  )
+            </Toolbar>
+          </AppBar>
+          <div className={classes.toolbar} />
+          <Grid container justify="center">
+            <Switch>
+              <Route exact path="/home" component={HomePage} />
+              <Route path="/product-catalog" component={ProductCatalogPage} />
+              <Route path="/add-product" component={AddProductPage} />
+              <Redirect to="/home" />
+            </Switch>
+          </Grid>
+        </main>
+      </div>
+    )
+  }
 }
 
 export default withStyles(styles)(App)
