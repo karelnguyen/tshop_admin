@@ -57,7 +57,7 @@ class MainDrawer extends React.Component {
           }}
         >
           <div className={classes.toolbar} />
-          <Button variant="contained" onClick={this.toggleDrawer.bind(this)}>close </Button>
+          <Button variant="contained" color="secondary" onClick={this.toggleDrawer.bind(this)}>close </Button>
           <Divider />
           <List>
             <Link to="/" className={classes.link}>

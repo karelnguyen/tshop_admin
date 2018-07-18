@@ -190,8 +190,8 @@ class ProductsTable extends React.Component {
                          count={data.length}
                          page={page}
                          rowsPerPage={rowsPerPage}
-                         onChangePage={this.handleChangePage}
-                         onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                         onChangePage={this.handleChangePage.bind(this)}
+                         onChangeRowsPerPage={this.handleChangeRowsPerPage.bind(this)}
                          ActionsComponent={TablePaginationActionsWrapped}
                          />
                      </TableRow>

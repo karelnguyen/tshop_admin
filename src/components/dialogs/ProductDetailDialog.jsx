@@ -23,7 +23,6 @@ const styles = theme => ({
   boxes: {
     height: '60vh',
     backgroundColor: '#d6d1d1',
-    objectFit: 'cover',
   },
   paper: {
     padding: '40px',
@@ -31,6 +30,16 @@ const styles = theme => ({
   topBar: {
     marginTop: '30px',
     marginBottom: '40px'
+  },
+  textContent: {
+    backgroundColor: 'red'
+  },
+  imgContent: {
+    objectFit: 'contain'
+  },
+  placeholderImg: {
+    width: '100%',
+    heigth: '100%',
   }
 })
 
@@ -73,10 +82,8 @@ class ProductDetailDialog extends React.Component {
           <Button
             variant="fab"
             color="primary"
-            aria-label="Update"
-            onClick={() => {
-              this.showProductDetail()
-            }}
+            aria-label="Product detail"
+            onClick={this.showProductDetail.bind(this)}
             >
             <AssignmentIcon />
           </Button>
@@ -90,19 +97,19 @@ class ProductDetailDialog extends React.Component {
             <Grid container>
               <Grid item xs={12} sm={12} className={classes.topBar}>
                 <Grid container direction="row" justify="space-between">
-                  <Button variant="contained"  onClick={() => {this.hideProductDetail()}}>
+                  <Button variant="contained"  onClick={this.hideProductDetail.bind(this)}>
                     Back</Button>
                   <Grid item>
                     <Grid container spacing={8}>
-                      <Grid item><UpdateProductDialog tableData={this.state.productDetails} /></Grid>
-                      <Grid item><DeleteProductDialog tableData={this.state.productDetails} /></Grid>
+                      <Grid item><UpdateProductDialog tableData={productDetails} /></Grid>
+                      <Grid item><DeleteProductDialog tableData={productDetails} /></Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item xs={12}>
                 <Grid container spacing={8} justify="space-between">
-                  <Grid item xs={12} sm={6} className={classes.boxes}>
+                  <Grid item xs={12} sm={6} className={`${classes.boxes} ${classes.textContent}`}>
                     <Typography variant="subheading" gutterBottom color="primary">id: {productDetails.id}</Typography>
                     <Typography variant="subheading" gutterBottom color="primary">_id: {productDetails._id}</Typography>
                     <Typography variant="subheading" gutterBottom color="primary">name: {productDetails.heading}</Typography>
@@ -113,8 +120,10 @@ class ProductDetailDialog extends React.Component {
                     <Typography variant="subheading" gutterBottom color="primary">longText: {productDetails.longText}</Typography>
                     <Typography variant="subheading" gutterBottom color="primary">updatedAt: {productDetails.updatedAt}</Typography>
                   </Grid>
-                  <Grid item xs={12} sm={6} className={classes.boxes} >
-                    <img alt="placeholder" src={NoImgPlaceholder} />
+                  <Grid item xs={12} sm={5} className={`${classes.boxes} ${classes.imgContent}`} >
+                    <div className={classes.imgWrapper}>
+                      <img src={NoImgPlaceholder} className={classes.placeholderImg}/>
+                    </div>
                   </Grid>
                 </Grid>
               </Grid>
