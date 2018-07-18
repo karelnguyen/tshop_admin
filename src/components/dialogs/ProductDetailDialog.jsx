@@ -12,17 +12,18 @@ import Tooltip from '@material-ui/core/Tooltip'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.default,
   },
   dialogRoot: {
-    padding: '80px'
+    padding: '80px',
+    backgroundColor: '#e2e0e0',
+    height: '100vh'
   },
   boxes: {
-    height: '60vh',
-    backgroundColor: '#d6d1d1',
+    height: '50vh',
   },
   paper: {
     padding: '40px',
@@ -31,15 +32,21 @@ const styles = theme => ({
     marginTop: '30px',
     marginBottom: '40px'
   },
-  textContent: {
-    backgroundColor: 'red'
-  },
-  imgContent: {
-    objectFit: 'contain'
+  imgWrapper: {
+    objectFit: 'fit',
+    height: '100%'
   },
   placeholderImg: {
-    width: '100%',
-    heigth: '100%',
+    height: '100%',
+    width: '100%'
+  },
+  backBtn: {
+    height: '20px'
+  },
+  textDetailPaper: {
+    padding: '5px',
+    paddingTop: '15px',
+    marginBottom: '10px'
   }
 })
 
@@ -93,42 +100,125 @@ class ProductDetailDialog extends React.Component {
           open={productDetailBool}
           fullScreen
           >
-          <div  className={classes.dialogRoot}>
-            <Grid container>
-              <Grid item xs={12} sm={12} className={classes.topBar}>
-                <Grid container direction="row" justify="space-between">
-                  <Button variant="contained"  onClick={this.hideProductDetail.bind(this)}>
-                    Back</Button>
-                  <Grid item>
-                    <Grid container spacing={8}>
-                      <Grid item><UpdateProductDialog tableData={productDetails} /></Grid>
-                      <Grid item><DeleteProductDialog tableData={productDetails} /></Grid>
+          <Grid container className={classes.dialogRoot} justify="center">
+            <Grid item  lg={8}>
+              <Grid container justify="center">
+                <Grid item xs={12} sm={12} className={classes.topBar}>
+                  <Grid container direction="row" justify="space-between" alignItems="center">
+                    <Button variant="raised" color="primary" onClick={this.hideProductDetail.bind(this)}
+                      className={classes.backBtn}>
+                      Back
+                    </Button>
+                    <Grid item>
+                      <Grid container spacing={8}>
+                        <Grid item><UpdateProductDialog tableData={productDetails} /></Grid>
+                        <Grid item><DeleteProductDialog tableData={productDetails} /></Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" justify="space-between" spacing={24}>
+                    <Grid item xs={7} sm={7}>
+                      <div className={`${classes.boxes} ${classes.textContent}`}>
+                        <Grid container spacing={8} direction="row" alignItems="center">
+                          <Grid item xs={1} sm={1} lg={1}>
+                              <Typography variant="button" gutterBottom>
+                                name:
+                              </Typography>
+                          </Grid>
+                          <Grid item xs={11} sm={11}>
+                            <Paper className={classes.textDetailPaper}>
+                              <Typography variant="headline" gutterBottom>{productDetails.heading}</Typography>
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Grid container spacing={8} direction="row" alignItems="center">
+                          <Grid item xs={1} sm={1} lg={1}>
+                              <Typography variant="button" gutterBottom>
+                                id:
+                              </Typography>
+                          </Grid>
+                          <Grid item xs={11} sm={11}>
+                            <Paper className={classes.textDetailPaper}>
+                              <Typography variant="body1" gutterBottom>{productDetails.id}</Typography>
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Grid container spacing={8} direction="row" alignItems="center">
+                          <Grid item xs={1} sm={1} lg={1}>
+                              <Typography variant="button" gutterBottom>
+                                short text:
+                              </Typography>
+                          </Grid>
+                          <Grid item xs={11} sm={11}>
+                            <Paper className={classes.textDetailPaper}>
+                              <Typography variant="body1" gutterBottom>{productDetails.shortText}</Typography>
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Grid container spacing={8} direction="row" alignItems="center">
+                          <Grid item xs={1} sm={1} lg={1}>
+                              <Typography variant="button" gutterBottom>
+                                long text:
+                              </Typography>
+                          </Grid>
+                          <Grid item xs={11} sm={11}>
+                            <Paper className={classes.textDetailPaper}>
+                              <Typography variant="body1" gutterBottom>{productDetails.longText}</Typography>
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Grid container spacing={8} direction="row" alignItems="center">
+                          <Grid item xs={1} sm={1} lg={1}>
+                              <Typography variant="button" gutterBottom>
+                                size:
+                              </Typography>
+                          </Grid>
+                          <Grid item xs={11} sm={11}>
+                            <Paper className={classes.textDetailPaper}>
+                              <Typography variant="body1" gutterBottom>{productDetails.size}</Typography>
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Grid container spacing={8} direction="row" alignItems="center">
+                          <Grid item xs={1} sm={1} lg={1}>
+                              <Typography variant="button" gutterBottom>
+                                color:
+                              </Typography>
+                          </Grid>
+                          <Grid item xs={11} sm={11}>
+                            <Paper className={classes.textDetailPaper}>
+                              <Typography variant="body1" gutterBottom>{productDetails.color}</Typography>
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        <Grid container spacing={8} direction="row" alignItems="center">
+                          <Grid item xs={1} sm={1} lg={1}>
+                              <Typography variant="button" gutterBottom>
+                                price:
+                              </Typography>
+                          </Grid>
+                          <Grid item xs={11} sm={11}>
+                            <Paper className={classes.textDetailPaper}>
+                              <Typography variant="body1" gutterBottom>{productDetails.price}</Typography>
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                      </div>
+                    </Grid>
+                    <Grid item xs={5} sm={5}>
+                      <Paper className={`${classes.boxes} ${classes.imgGridWrapper}`}>
+                        <div className={classes.imgWrapper}>
+                          <img alt="placeholder img" src={NoImgPlaceholder} className={classes.placeholderImg}/>
+                        </div>
+                      </Paper>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Grid container spacing={8} justify="space-between">
-                  <Grid item xs={12} sm={6} className={`${classes.boxes} ${classes.textContent}`}>
-                    <Typography variant="subheading" gutterBottom color="primary">id: {productDetails.id}</Typography>
-                    <Typography variant="subheading" gutterBottom color="primary">_id: {productDetails._id}</Typography>
-                    <Typography variant="subheading" gutterBottom color="primary">name: {productDetails.heading}</Typography>
-                    <Typography variant="subheading" gutterBottom color="primary">color: {productDetails.color}</Typography>
-                    <Typography variant="subheading" gutterBottom color="primary">price: {productDetails.price}</Typography>
-                    <Typography variant="subheading" gutterBottom color="primary">size: {productDetails.size}</Typography>
-                    <Typography variant="subheading" gutterBottom color="primary">shortText: {productDetails.shortText}</Typography>
-                    <Typography variant="subheading" gutterBottom color="primary">longText: {productDetails.longText}</Typography>
-                    <Typography variant="subheading" gutterBottom color="primary">updatedAt: {productDetails.updatedAt}</Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={5} className={`${classes.boxes} ${classes.imgContent}`} >
-                    <div className={classes.imgWrapper}>
-                      <img src={NoImgPlaceholder} className={classes.placeholderImg}/>
-                    </div>
-                  </Grid>
-                </Grid>
-              </Grid>
             </Grid>
-          </div>
+          </Grid>
         </Dialog>
       </div>
     )

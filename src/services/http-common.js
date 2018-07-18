@@ -10,8 +10,7 @@ const client = axios.create({ baseURL: 'https://mladejvlcak.herokuapp.com' })
 // Request Wrapper
 const request = (options) => {
   const onSuccess = (response) => {
-    console.log('Request Successful!', response)
-    console.log('Request Data', response.data)
+    console.log('Request OK, request data:', response.data)
     return response
   }
 
