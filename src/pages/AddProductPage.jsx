@@ -52,9 +52,16 @@ class AddProductPage extends React.Component {
   state = {
     allProducts: [],
     input: {},
-    validation: {},
+    validation: {
+      heading: false,
+      shortText: false,
+      longText: false,
+      color: false,
+      price: false,
+    },
     size: '',
-    addButton: true
+    showAddButtonBool: true,
+    inputErrors: {},
   }
 
   getAllProducts () {
@@ -63,9 +70,6 @@ class AddProductPage extends React.Component {
       .then(response => {
         this.setState({ allProducts: response.data })
       })
-      .catch(err => {
-        console.log('Error', err)
-      })
   }
 
   async addProduct () {
@@ -73,6 +77,7 @@ class AddProductPage extends React.Component {
 
     let idArr = []
     let data = this.state.input
+
     this.state.allProducts.map( x => x.hasOwnProperty('id') ? idArr.push(x.id) : x )
     idArr = idArr.map(id => Number(id))
     let id = isFinite(Math.max(...idArr) + 1) ? Math.max(...idArr) + 1 : 1
@@ -83,34 +88,41 @@ class AddProductPage extends React.Component {
       .then(() => {
         window.location.reload()
       })
-      .catch(err => {
-        console.log('Error', err)
-      })
   }
 
   saveInputData (event) {
-    let data = this.state.input
-    data[event.target.id] = event.target.value
-    this.setState({ input: data })
     // Validator is set to exact patterns for each input. Adding inputs also require adding additional patterns
-    if (Validator.testReg(event.target.id, event.target.value) === false) {
-      let errorData = this.state.validation
-      errorData[event.target.id] = true
-      this.setState({ validation: errorData })
-    } else {
-      this.setState({ validation: {} })
-    }
+    const validator = Validator.testReg(event.target.id, event.target.value)
+    const payload = this.state.input
+    const validationObj = this.state.validation
+    const inputErrors = this.state.inputErrors
+
+    payload[event.target.id] = event.target.value
+    this.setState({ input: payload })
+
+    validationObj[event.target.id] = validator
+    this.setState({ validation: validationObj })
+
+    inputErrors[event.target.id] = !validator
+    this.setState({ inputErrors: inputErrors })
+
     return this.toggleAddButton()
   }
 
   toggleAddButton () {
-    // Change when data model/schema change. Also the RegExp will need to be updated due to exact patterns for each entry input. (toggle button)
-    let objSize = Object.keys(this.state.input).length
-    let objVal = Object.keys(this.state.validation).length
-    if (objSize === 7 && objVal === 0) {
-      this.setState({ addButton: false })
+    let anomalyObj = []
+    let anomaly = true
+    const validationObj = this.state.validation
+
+    for (let i in validationObj) {
+      anomalyObj.push(validationObj[i])
+    }
+
+    anomalyObj.map(x => x === false ? anomaly = false : null)
+    if (anomaly === true) {
+      this.setState({ showAddButtonBool: false })
     } else {
-      this.setState({ addButton: true })
+      this.setState({ showAddButtonBool: true })
     }
   }
 
@@ -141,7 +153,7 @@ class AddProductPage extends React.Component {
               onChange={this.saveInputData.bind(this)}
               required={true}
               multiline={true}
-              error={this.state.validation.heading}
+              error={this.state.inputErrors.heading}
               value={this.state.input.heading}
             />
             <TextField
@@ -169,7 +181,7 @@ class AddProductPage extends React.Component {
               fullWidth={true}
               multiline={true}
               required={true}
-              error={this.state.validation.shortText}
+              error={this.state.inputErrors.shortText}
             />
             <TextField
               id="longText"
@@ -181,7 +193,7 @@ class AddProductPage extends React.Component {
               fullWidth={true}
               multiline={true}
               required={true}
-              error={this.state.validation.longText}
+              error={this.state.inputErrors.longText}
             />
             <TextField
               id="color"
@@ -191,7 +203,7 @@ class AddProductPage extends React.Component {
               className={classes.input}
               onChange={this.saveInputData.bind(this)}
               required={true}
-              error={this.state.validation.color}
+              error={this.state.inputErrors.color}
             />
             <TextField
               id="img"
@@ -210,7 +222,7 @@ class AddProductPage extends React.Component {
               className={classes.input}
               onChange={this.saveInputData.bind(this)}
               required={true}
-              error={this.state.validation.price}
+              error={this.state.inputErrors.price}
             />
             <Tooltip id="tooltip-fab" title="Add">
               <span>
@@ -220,7 +232,7 @@ class AddProductPage extends React.Component {
                   variant="fab"
                   color="primary"
                   aria-label="Přidat"
-                  disabled={this.state.addButton}
+                  disabled={this.state.showAddButtonBool}
                   onClick={this.addProduct.bind(this)}>
                   <AddIcon/>
                 </Button>

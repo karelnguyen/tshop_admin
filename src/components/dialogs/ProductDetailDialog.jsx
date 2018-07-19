@@ -75,9 +75,6 @@ class ProductDetailDialog extends React.Component {
       .then(response => {
         this.setState({ productDetails: response.data})
       })
-      .catch(err => {
-        console.log('err', err)
-      })
   }
 
   render () {
