@@ -92,10 +92,12 @@ class ProductsTable extends React.Component {
     let data = this.state.selected
     let iterCounter = 0
     data.map(x => {
-      return ProductsService.destroy(x).then(() => {
-        iterCounter++
-        if (iterCounter === data.length) {
-          window.location.reload()
+      return ProductsService
+        .destroy(x)
+        .then(() => {
+          iterCounter++
+          if (iterCounter === data.length) {
+            window.location.reload()
         }
       })
     })
@@ -170,7 +172,7 @@ class ProductsTable extends React.Component {
                              <Grid container direction="row">
                                <ProductDetailDialog id={item.id}/>
                                <span className={classes.updateBtn}>
-                                 <UpdateProductDialog tableData={item} />
+                                 <UpdateProductDialog tableData={item}/>
                                </span>
                                <DeleteProductDialog tableData={item}/>
                              </Grid>

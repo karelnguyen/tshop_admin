@@ -66,7 +66,7 @@ class UpdateProductDialog extends React.Component {
   toggleAddButton () {
     const data = this.state.validation
     let toggleAddButtonBool = true
-    
+
     for (let i in data) {
       if (data[i] === true) {
         toggleAddButtonBool = false
@@ -87,10 +87,7 @@ class UpdateProductDialog extends React.Component {
     return ProductsService
       .update(id, data)
       .then(() => {
-        window.location.reload()
-      })
-      .catch(err => {
-        console.log('Error', err)
+        window.history.reload()
       })
   }
 
