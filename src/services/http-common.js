@@ -2,11 +2,6 @@ import axios from 'axios'
 
 const client = axios.create({ baseURL: 'https://mladejvlcak.herokuapp.com' })
 
-// TODO: behaviours before response
-// client.interceptors.response.use(response => {
-//   return response
-// })
-
 // Request Wrapper
 const request = (options) => {
   const onSuccess = (response) => {

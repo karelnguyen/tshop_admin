@@ -2,6 +2,7 @@ import React from 'react'
 import ProductCatalogPage from './pages/ProductCatalogPage'
 import AddProductPage from './pages/AddProductPage'
 import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
 import { Route, Switch, Redirect } from 'react-router-dom'
 // Material-ui
 import { withStyles } from '@material-ui/core/styles'
@@ -54,6 +55,7 @@ class App extends React.Component {
               <Route exact path="/home" component={HomePage} />
               <Route path="/product-catalog" component={ProductCatalogPage} />
               <Route path="/add-product" component={AddProductPage} />
+              <Route path="/login" component={LoginPage} />
               <Redirect to="/home" />
             </Switch>
           </Grid>
