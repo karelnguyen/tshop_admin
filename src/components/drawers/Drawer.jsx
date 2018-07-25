@@ -63,7 +63,7 @@ class MainDrawer extends React.Component {
             <Link to="/" className={classes.link}>
               <ListItem button>
                 <Typography variant="subheading" gutterBottom>
-                  Home Page
+                  Dashboard
                 </Typography>
               </ListItem>
             </Link>
@@ -83,6 +83,13 @@ class MainDrawer extends React.Component {
             </Link>
           </List>
           <Divider />
+            <Link to="/login" className={classes.link}>
+              <ListItem button>
+                <Typography variant="subheading" gutterBottom>
+                  Login
+                </Typography>
+              </ListItem>
+            </Link>
         </Drawer>
       </div>
     )

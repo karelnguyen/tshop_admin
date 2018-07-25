@@ -27,7 +27,7 @@ class ProductCatalog extends React.Component {
     const { products } = this.state
     return (
       <div>
-        <Typography variant="display3" gutterBottom color="primary">
+        <Typography variant="display1" gutterBottom color="primary">
           Produkt katalog
         </Typography>
         <ProductsTable tableData={products}/>

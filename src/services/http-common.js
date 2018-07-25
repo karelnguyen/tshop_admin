@@ -1,16 +1,21 @@
 import axios from 'axios'
 
-const client = axios.create({ baseURL: 'https://mladejvlcak.herokuapp.com' })
+const client = axios.create({ baseURL: 'https://sheltered-caverns-10503.herokuapp.com/' })
+
+const setHeaderToken = (token) => {
+  client.defaults.headers.common['Authorization'] = 'Bearer ' + token
+}
 
 // Request Wrapper
 const request = (options) => {
+
   const onSuccess = (response) => {
-    console.log('Request OK, request data:', response.data)
+    // console.log('Request OK, request data:', response.data)
     return response
   }
 
   const onError = (error) => {
-    console.log('Request failed: ', error)
+    // console.log('Request failed: ', error)
     return Promise.reject(error.response)
   }
 
@@ -21,7 +26,8 @@ const request = (options) => {
 
 const httpCommon = {
   client,
-  request
+  request,
+  setHeaderToken,
 }
 
 export default httpCommon

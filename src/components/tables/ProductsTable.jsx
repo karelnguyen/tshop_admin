@@ -24,7 +24,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 const styles = theme => ({
   noData: {
     minHeight: '200px',
-    width: '70vw'
+    width: '100%',
   },
   noDataDiv: {
     padding: '40px'

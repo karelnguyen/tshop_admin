@@ -119,84 +119,84 @@ class ProductDetailDialog extends React.Component {
                     <Grid item xs={7} sm={7}>
                       <div className={`${classes.boxes} ${classes.textContent}`}>
                         <Grid container spacing={8} direction="row" alignItems="center">
-                          <Grid item xs={1} sm={1} lg={1}>
+                          <Grid item xs={2} sm={2} lg={2}>
                               <Typography variant="button" gutterBottom>
                                 name:
                               </Typography>
                           </Grid>
-                          <Grid item xs={11} sm={11}>
+                          <Grid item xs={10} sm={10}>
                             <Paper className={classes.textDetailPaper}>
                               <Typography variant="headline" gutterBottom>{productDetails.heading}</Typography>
                             </Paper>
                           </Grid>
                         </Grid>
                         <Grid container spacing={8} direction="row" alignItems="center">
-                          <Grid item xs={1} sm={1} lg={1}>
+                          <Grid item xs={2} sm={2} lg={2}>
                               <Typography variant="button" gutterBottom>
                                 id:
                               </Typography>
                           </Grid>
-                          <Grid item xs={11} sm={11}>
+                          <Grid item xs={10} sm={10}>
                             <Paper className={classes.textDetailPaper}>
                               <Typography variant="body1" gutterBottom>{productDetails.id}</Typography>
                             </Paper>
                           </Grid>
                         </Grid>
                         <Grid container spacing={8} direction="row" alignItems="center">
-                          <Grid item xs={1} sm={1} lg={1}>
+                          <Grid item xs={2} sm={2} lg={2}>
                               <Typography variant="button" gutterBottom>
                                 short text:
                               </Typography>
                           </Grid>
-                          <Grid item xs={11} sm={11}>
+                          <Grid item xs={10} sm={10}>
                             <Paper className={classes.textDetailPaper}>
                               <Typography variant="body1" gutterBottom>{productDetails.shortText}</Typography>
                             </Paper>
                           </Grid>
                         </Grid>
                         <Grid container spacing={8} direction="row" alignItems="center">
-                          <Grid item xs={1} sm={1} lg={1}>
+                          <Grid item xs={2} sm={2} lg={2}>
                               <Typography variant="button" gutterBottom>
                                 long text:
                               </Typography>
                           </Grid>
-                          <Grid item xs={11} sm={11}>
+                          <Grid item xs={10} sm={10}>
                             <Paper className={classes.textDetailPaper}>
                               <Typography variant="body1" gutterBottom>{productDetails.longText}</Typography>
                             </Paper>
                           </Grid>
                         </Grid>
                         <Grid container spacing={8} direction="row" alignItems="center">
-                          <Grid item xs={1} sm={1} lg={1}>
+                          <Grid item xs={2} sm={2} lg={2}>
                               <Typography variant="button" gutterBottom>
                                 size:
                               </Typography>
                           </Grid>
-                          <Grid item xs={11} sm={11}>
+                          <Grid item xs={10} sm={10}>
                             <Paper className={classes.textDetailPaper}>
                               <Typography variant="body1" gutterBottom>{productDetails.size}</Typography>
                             </Paper>
                           </Grid>
                         </Grid>
                         <Grid container spacing={8} direction="row" alignItems="center">
-                          <Grid item xs={1} sm={1} lg={1}>
+                          <Grid item xs={2} sm={2} lg={2}>
                               <Typography variant="button" gutterBottom>
                                 color:
                               </Typography>
                           </Grid>
-                          <Grid item xs={11} sm={11}>
+                          <Grid item xs={10} sm={10}>
                             <Paper className={classes.textDetailPaper}>
                               <Typography variant="body1" gutterBottom>{productDetails.color}</Typography>
                             </Paper>
                           </Grid>
                         </Grid>
                         <Grid container spacing={8} direction="row" alignItems="center">
-                          <Grid item xs={1} sm={1} lg={1}>
+                          <Grid item xs={2} sm={2} lg={2}>
                               <Typography variant="button" gutterBottom>
                                 price:
                               </Typography>
                           </Grid>
-                          <Grid item xs={11} sm={11}>
+                          <Grid item xs={10} sm={10}>
                             <Paper className={classes.textDetailPaper}>
                               <Typography variant="body1" gutterBottom>{productDetails.price}</Typography>
                             </Paper>

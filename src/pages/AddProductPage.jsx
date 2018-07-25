@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductsService from '../services/api/products'
 import Validator from '../mixins/validation'
+// Material-ui
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import AddIcon from '@material-ui/icons/Add'
@@ -15,7 +16,8 @@ const styles = theme => ({
   paper: {
     padding: '20px',
     paddingBot: '40px',
-    width: '50vw'
+    width: '70%',
+    margin: 'auto',
   },
   input: {
     margin: '5px'
@@ -136,7 +138,7 @@ class AddProductPage extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        <Typography variant="display3" gutterBottom color="primary">
+        <Typography variant="display1" gutterBottom color="primary">
           Přidat produkt
         </Typography>
         <Grid container >
