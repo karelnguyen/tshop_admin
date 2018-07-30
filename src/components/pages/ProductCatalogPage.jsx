@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductsService from '../services/api/products'
-import ProductsTable from '../components/tables/ProductsTable'
+import ProductsService from '../../services/api/products'
+import ProductsTable from '../tables/ProductsTable'
 import Typography from '@material-ui/core/Typography'
 
 class ProductCatalog extends React.Component {

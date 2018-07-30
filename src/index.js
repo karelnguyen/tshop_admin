@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import LoginPage from './pages/LoginPage'
+import LoginPage from './components/pages/LoginPage'
 import './index.css'
 import { BrowserRouter, Route } from 'react-router-dom'
 

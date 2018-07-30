@@ -1,10 +1,10 @@
 import React from 'react'
 import MainDrawer from './components/drawers/Drawer'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import HomePage from './pages/HomePage'
-import ProductCatalogPage from './pages/ProductCatalogPage'
-import AddProductPage from './pages/AddProductPage'
-import LoginPage from './pages/LoginPage'
+import HomePage from './components/pages/HomePage'
+import ProductCatalogPage from './components/pages/ProductCatalogPage'
+import AddProductPage from './components/pages/AddProductPage'
+import LoginPage from './components/pages/LoginPage'
 // Material-ui
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -54,7 +54,6 @@ class App extends React.Component {
                 <HomePage />
               </Grid>
             </Grid>
-            <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
         </main>
       </div>
     )

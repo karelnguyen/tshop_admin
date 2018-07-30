@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductsService from '../services/api/products'
-import Validator from '../mixins/validation'
+import ProductsService from '../../services/api/products'
+import Validator from '../../mixins/validation'
 // Material-ui
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'

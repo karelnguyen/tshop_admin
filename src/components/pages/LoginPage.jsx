@@ -1,5 +1,5 @@
 import React from 'react'
-// import AuthService from '../mixins/auth/AuthService'
+import AuthService from '../../services/auth/authService'
 // Material-ui
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
@@ -20,10 +20,15 @@ class LoginPage extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.login = this.login.bind(this)
   }
+
   handleChange (event) {
     this.setState({ [event.target.id ]: event.target.value })
   }
 
+  login () {
+    AuthService
+      .login(this.state.username, this.state.password)
+  }
 
   render () {
     const { classes } = this.props
@@ -41,11 +46,11 @@ class LoginPage extends React.Component {
         <Paper className={classes.paper}>
           <TextField
             id="password"
-            onChange={this.handleChange.bind(this)}
+            onChange={this.handleChange}
             >
           </TextField>
         </Paper>
-        <Button color="primary" variant="contained">Login</Button>
+        <Button color="primary" variant="contained" onClick={this.login}>Login</Button>
       </Grid>
     )
   }

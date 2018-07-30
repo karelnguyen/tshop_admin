@@ -47,18 +47,20 @@ class UpdateProductDialog extends React.Component {
 
   saveInputData (event) {
     let data = this.state.input
+    let errorData = this.state.validation
+
     data[event.target.id] = event.target.value
     this.setState({ input: data })
+
     // Validator is set to exact patterns for each input. Adding inputs also require adding additional patterns
     if (Validator.testReg(event.target.id, event.target.value) === false) {
-      let errorData = this.state.validation
       errorData[event.target.id] = true
       this.setState({ validation: errorData })
     } else {
-      let errorData = this.state.validation
       errorData[event.target.id] = false
       this.setState({ validation: errorData })
     }
+
     return this.toggleAddButton()
   }
 
