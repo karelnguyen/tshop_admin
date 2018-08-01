@@ -1,6 +1,7 @@
 import React from 'react'
 import HomePage from './components/pages/HomePage'
 import AuthService from './services/auth/authService'
+import MainDrawer from './components/drawers/Drawer'
 // Material-ui
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -21,16 +22,18 @@ const styles = theme => ({
   content: {
     overflowY: 'scroll',
     flexGrow: 1,
-    backgroundColor: '#e2e0e0',
+    backgroundColor: '#343434',
     padding: theme.spacing.unit * 3,
     minWidth: 0,
   },
   toolbar: theme.mixins.toolbar,
   title: {
-    marginLeft: '50px'
   },
   logoutBtn: {
     marginRight: '50px'
+  },
+  drawer: {
+    marginLeft: '50px'
   }
 })
 
@@ -53,8 +56,9 @@ class App extends React.Component {
           <AppBar position="absolute" className={classes.appBar}>
             <Toolbar>
               <Grid container justify="space-between" alignItems="center">
+                <MainDrawer className={classes.drawer}/>
                 <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                  TSHOP
+                  Tshop admin
                 </Typography>
                 <Button variant="contained" color="secondary" onClick={this.logout} className={classes.logoutBtn}>Logout</Button>
               </Grid>
@@ -62,7 +66,7 @@ class App extends React.Component {
           </AppBar>
           <div className={classes.toolbar} />
             <Grid container justify="center" className={classes.mainContent}>
-              <Grid item>
+              <Grid item md={10} lg={8}>
                 <HomePage />
               </Grid>
             </Grid>

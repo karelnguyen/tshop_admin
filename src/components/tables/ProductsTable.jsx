@@ -24,7 +24,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 const styles = theme => ({
   paper: {
     backgroundColor: '#e5e6e8',
-    width: '70%'
+    width: '100%'
   },
   noData: {
     minHeight: '200px',

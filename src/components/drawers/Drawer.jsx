@@ -8,7 +8,7 @@ import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import MenuIcon from '@material-ui/icons/Menu'
 
 
 const drawerWidth = 240
@@ -28,6 +28,9 @@ const styles = theme => ({
   },
   link: {
     textDecoration: 'none',
+  },
+  btn: {
+    marginLeft: '50px'
   }
 })
 
@@ -46,8 +49,8 @@ class MainDrawer extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        <Button variant="fab" color="secondary" onClick={this.toggleDrawer.bind(this)}>
-          <ChevronRightIcon></ChevronRightIcon>
+        <Button variant="fab" color="secondary" onClick={this.toggleDrawer.bind(this)} className={classes.btn}>
+          <MenuIcon />
         </Button>
         <Drawer
           open={openDrawer}
@@ -64,20 +67,6 @@ class MainDrawer extends React.Component {
               <ListItem button>
                 <Typography variant="subheading" gutterBottom>
                   Dashboard
-                </Typography>
-              </ListItem>
-            </Link>
-            <Link to="/product-catalog" className={classes.link}>
-              <ListItem button>
-                <Typography variant="subheading" gutterBottom>
-                  Produktový katalog
-                </Typography>
-              </ListItem>
-            </Link>
-            <Link to="/add-product" className={classes.link}>
-              <ListItem button>
-                <Typography variant="subheading" gutterBottom>
-                  Přidat produkt
                 </Typography>
               </ListItem>
             </Link>

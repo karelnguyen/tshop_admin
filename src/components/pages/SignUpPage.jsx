@@ -31,7 +31,7 @@ const styles = theme => ({
   }
 })
 
-class LoginPage extends React.Component {
+class SignUpPage extends React.Component {
   constructor() {
     super()
     this.handleChange = this.handleChange.bind(this)
@@ -139,4 +139,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default withStyles(styles)(LoginPage)
+export default withStyles(styles)(SignUpPage)

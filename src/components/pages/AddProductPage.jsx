@@ -14,7 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 const styles = theme => ({
   root: {
-    width: '70%',
+    width: '100%',
     margin: 'auto',
   },
   paper: {
@@ -28,7 +28,8 @@ const styles = theme => ({
   btn: {
     width: '70px',
     height: '70px',
-    marginTop: '20px'
+    marginTop: '20px',
+    marginLeft: '100px',
   },
   sizeLabel: {
     width: '50px',
@@ -88,6 +89,7 @@ class AddProductPage extends React.Component {
     let idArr = []
     let data = this.state.input
 
+    // Creating product id
     this.state.allProducts.map( x => x.hasOwnProperty('id') ? idArr.push(x.id) : x )
     idArr = idArr.map(id => Number(id))
     let id = isFinite(Math.max(...idArr) + 1) ? Math.max(...idArr) + 1 : 1

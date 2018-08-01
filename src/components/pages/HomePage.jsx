@@ -2,46 +2,58 @@ import React from 'react'
 import AddProductPage from './AddProductPage'
 import ProductCatalogPage from './ProductCatalogPage'
 // Material-ui
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+// import amber from '@material-ui/core/colors/amber'
+
+// Custom UI theme
+const theme = createMuiTheme({
+  // palette: {
+  //   secondary: amber
+  // }
+})
 
 const styles = theme => ({
   AddProductPage: {
     marginTop: '30px',
   },
   ProductCatalogPage: {
-  }
+  },
+  // expanel: {
+  //   borderRadius: '20px'
+  // }
 })
 
 function Home (props) {
   const { classes } = props
   return (
     <div>
-      <Typography variant="display2" gutterBottom color="primary">
-        Dashboard
-      </Typography>
+      
+      <MuiThemeProvider theme={theme}>
+        <Typography variant="display2" gutterBottom color="secondary">
+          Dashboard
+        </Typography>
+      </MuiThemeProvider>
 
-      <ExpansionPanel>
+      <ExpansionPanel className={classes.expanel}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="headline" color="primary">Produktový katalog</Typography>
+          <Typography variant="headline" >Produktový katalog</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <ProductCatalogPage className={classes.ProductCatalogPage}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
-      <ExpansionPanel>
+      <ExpansionPanel className={classes.expanel}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="headline" color="primary">Přidat produkt</Typography>
+          <Typography variant="headline" >Přidat produkt</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            <AddProductPage className={classes.AddProductPage}/>
-          </Typography>
+          <AddProductPage className={classes.AddProductPage}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
