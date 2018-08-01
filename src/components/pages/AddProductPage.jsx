@@ -13,17 +13,19 @@ import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 
 const styles = theme => ({
+  root: {
+    width: '70%',
+    margin: 'auto',
+  },
   paper: {
     padding: '20px',
     paddingBot: '40px',
-    width: '70%',
-    margin: 'auto',
+    backgroundColor: '#e5e6e8',
   },
   input: {
     margin: '5px'
   },
   btn: {
-    marginLeft: '150px',
     width: '70px',
     height: '70px',
     marginTop: '20px'
@@ -55,7 +57,7 @@ class AddProductPage extends React.Component {
     super()
     this.saveInputData = this.saveInputData.bind(this)
     this.addProduct = this.addProduct.bind(this)
-    
+
     this.state = {
       allProducts: [],
       input: {},
@@ -143,10 +145,7 @@ class AddProductPage extends React.Component {
   render () {
     const { classes } = this.props
     return (
-      <div>
-        <Typography variant="display1" gutterBottom color="primary">
-          Přidat produkt
-        </Typography>
+      <div className={classes.root}>
         <Grid container >
           <Paper className={classes.paper} elevation={4}>
             <Typography variant="body2" gutterBottom color="primary">

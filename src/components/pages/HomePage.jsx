@@ -1,10 +1,13 @@
 import React from 'react'
 import AddProductPage from './AddProductPage'
 import ProductCatalogPage from './ProductCatalogPage'
+// Material-ui
 import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 const styles = theme => ({
   AddProductPage: {
@@ -18,13 +21,30 @@ function Home (props) {
   const { classes } = props
   return (
     <div>
-      <Typography variant="display3" gutterBottom color="primary">
+      <Typography variant="display2" gutterBottom color="primary">
         Dashboard
       </Typography>
-      <Grid container direction="column">
-        <ProductCatalogPage className={classes.ProductCatalogPage}/>
-        <AddProductPage className={classes.AddProductPage}/>
-      </Grid>
+
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="headline" color="primary">Produktový katalog</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <ProductCatalogPage className={classes.ProductCatalogPage}/>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="headline" color="primary">Přidat produkt</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+            <AddProductPage className={classes.AddProductPage}/>
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+
     </div>
   )
 }

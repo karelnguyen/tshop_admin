@@ -22,6 +22,10 @@ import Paper from '@material-ui/core/Paper'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const styles = theme => ({
+  paper: {
+    backgroundColor: '#e5e6e8',
+    width: '70%'
+  },
   noData: {
     minHeight: '200px',
     width: '100%',
@@ -109,7 +113,7 @@ class ProductsTable extends React.Component {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
     const { classes } = this.props
     return (
-      <Paper>
+      <Paper className={classes.paper}>
           {data.length === 0
               ?
               <Grid container className={classes.noData} justify="center" alignItems="center">

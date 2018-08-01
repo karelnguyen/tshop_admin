@@ -28,6 +28,9 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
   title: {
     marginLeft: '50px'
+  },
+  logoutBtn: {
+    marginRight: '50px'
   }
 })
 
@@ -49,10 +52,12 @@ class App extends React.Component {
         <main className={classes.content}>
           <AppBar position="absolute" className={classes.appBar}>
             <Toolbar>
-              <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                TSHOP
-              </Typography>
-              <Button onClick={this.logout}>Logout</Button>
+              <Grid container justify="space-between" alignItems="center">
+                <Typography variant="title" color="inherit" noWrap className={classes.title}>
+                  TSHOP
+                </Typography>
+                <Button variant="contained" color="secondary" onClick={this.logout} className={classes.logoutBtn}>Logout</Button>
+              </Grid>
             </Toolbar>
           </AppBar>
           <div className={classes.toolbar} />

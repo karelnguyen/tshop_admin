@@ -118,6 +118,7 @@ class LoginPage extends React.Component {
                   />
                 <TextField
                   id="password"
+                  type="password"
                   onChange={this.handleChange}
                   placeholder="password"
                   required={true}
