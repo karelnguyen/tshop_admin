@@ -8,6 +8,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import ProductsIcon from '@material-ui/icons/LibraryBooks'
+import ProductAddIcon from '@material-ui/icons/LibraryAdd'
 // import amber from '@material-ui/core/colors/amber'
 
 // Custom UI theme
@@ -19,20 +21,22 @@ const theme = createMuiTheme({
 
 const styles = theme => ({
   AddProductPage: {
-    marginTop: '30px',
   },
   ProductCatalogPage: {
   },
-  // expanel: {
-  //   borderRadius: '20px'
-  // }
+  expanel: {
+  },
+  icons: {
+    marginRight: '30px',
+    marginTop: '2px'
+  }
 })
 
 function Home (props) {
   const { classes } = props
   return (
     <div>
-      
+
       <MuiThemeProvider theme={theme}>
         <Typography variant="display2" gutterBottom color="secondary">
           Dashboard
@@ -41,6 +45,7 @@ function Home (props) {
 
       <ExpansionPanel className={classes.expanel}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ProductsIcon  className={classes.icons}/>
           <Typography variant="headline" >Produktový katalog</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
@@ -50,6 +55,7 @@ function Home (props) {
 
       <ExpansionPanel className={classes.expanel}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ProductAddIcon  className={classes.icons}/>
           <Typography variant="headline" >Přidat produkt</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
