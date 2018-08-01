@@ -2,14 +2,23 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import LoginPage from './components/pages/LoginPage'
+import AuthService from './services/auth/authService'
 import './index.css'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+      AuthService.isAuthenticated() === true
+      ? <Component {...props} />
+      : <Redirect to='/login' />
+    )} />
+)
 
 ReactDOM.render(
-  <BrowserRouter >
+  <Router>
     <div>
-      <Route exact path="/" component={App} />
-      <Route exact path="/login" component={LoginPage} />
+      <PrivateRoute exact path="/" component={App} />
+      <Route path="/login" component={LoginPage} />
     </div>
-  </BrowserRouter>
+  </Router>
   , document.getElementById('root'))

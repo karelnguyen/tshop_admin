@@ -1,13 +1,10 @@
 import React from 'react'
-import MainDrawer from './components/drawers/Drawer'
-import { Route, Switch, Redirect } from 'react-router-dom'
 import HomePage from './components/pages/HomePage'
-import ProductCatalogPage from './components/pages/ProductCatalogPage'
-import AddProductPage from './components/pages/AddProductPage'
-import LoginPage from './components/pages/LoginPage'
+import AuthService from './services/auth/authService'
 // Material-ui
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
@@ -35,6 +32,15 @@ const styles = theme => ({
 })
 
 class App extends React.Component {
+  constructor() {
+    super()
+    this.logout = this.logout.bind(this)
+  }
+
+  logout () {
+    AuthService
+      .logout()
+  }
 
   render () {
     const { classes } = this.props
@@ -46,6 +52,7 @@ class App extends React.Component {
               <Typography variant="title" color="inherit" noWrap className={classes.title}>
                 TSHOP
               </Typography>
+              <Button onClick={this.logout}>Logout</Button>
             </Toolbar>
           </AppBar>
           <div className={classes.toolbar} />
@@ -59,9 +66,5 @@ class App extends React.Component {
     )
   }
 }
-
-
-// App = withStyles(styles)(App)
-// export default withAuth(App)
 
 export default withStyles(styles)(App)

@@ -51,19 +51,25 @@ const sizes = [
 ]
 
 class AddProductPage extends React.Component {
-  state = {
-    allProducts: [],
-    input: {},
-    validation: {
-      heading: false,
-      shortText: false,
-      longText: false,
-      color: false,
-      price: false,
-    },
-    size: '',
-    showAddButtonBool: true,
-    inputErrors: {},
+  constructor() {
+    super()
+    this.saveInputData = this.saveInputData.bind(this)
+    this.addProduct = this.addProduct.bind(this)
+    
+    this.state = {
+      allProducts: [],
+      input: {},
+      validation: {
+        heading: false,
+        shortText: false,
+        longText: false,
+        color: false,
+        price: false,
+      },
+      size: '',
+      showAddButtonBool: true,
+      inputErrors: {},
+    }
   }
 
   getAllProducts () {
@@ -152,7 +158,7 @@ class AddProductPage extends React.Component {
               placeholder="abc"
               margin="normal"
               className={classes.input}
-              onChange={this.saveInputData.bind(this)}
+              onChange={this.saveInputData}
               required={true}
               multiline={true}
               error={this.state.inputErrors.heading}
@@ -179,7 +185,7 @@ class AddProductPage extends React.Component {
               placeholder="abc"
               margin="normal"
               className={classes.input}
-              onChange={this.saveInputData.bind(this)}
+              onChange={this.saveInputData}
               fullWidth={true}
               multiline={true}
               required={true}
@@ -191,7 +197,7 @@ class AddProductPage extends React.Component {
               placeholder="abc"
               margin="normal"
               className={classes.input}
-              onChange={this.saveInputData.bind(this)}
+              onChange={this.saveInputData}
               fullWidth={true}
               multiline={true}
               required={true}
@@ -203,7 +209,7 @@ class AddProductPage extends React.Component {
               placeholder="black"
               margin="normal"
               className={classes.input}
-              onChange={this.saveInputData.bind(this)}
+              onChange={this.saveInputData}
               required={true}
               error={this.state.inputErrors.color}
             />
@@ -213,7 +219,7 @@ class AddProductPage extends React.Component {
               placeholder="zatim string"
               margin="normal"
               className={classes.input}
-              onChange={this.saveInputData.bind(this)}
+              onChange={this.saveInputData}
               required={true}
             />
             <TextField
@@ -222,7 +228,7 @@ class AddProductPage extends React.Component {
               placeholder="1000"
               margin="normal"
               className={classes.input}
-              onChange={this.saveInputData.bind(this)}
+              onChange={this.saveInputData}
               required={true}
               error={this.state.inputErrors.price}
             />
@@ -235,7 +241,7 @@ class AddProductPage extends React.Component {
                   color="primary"
                   aria-label="Přidat"
                   disabled={this.state.showAddButtonBool}
-                  onClick={this.addProduct.bind(this)}>
+                  onClick={this.addProduct}>
                   <AddIcon/>
                 </Button>
               </span>

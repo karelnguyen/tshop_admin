@@ -3,6 +3,7 @@ const longTextInput = new RegExp(/^.{1,500}$/)
 const nameInput = new RegExp(/^.{1,30}$/)
 const shortTextInput = new RegExp(/^.{1,150}$/)
 const colorInput = new RegExp(/^[a-zA-Z]{1,30}$/)
+const emailInput = new RegExp(/\S+@\S+\.\S+/)
 
 function testReg (id, data) {
   switch (id) {
@@ -10,6 +11,7 @@ function testReg (id, data) {
     case 'shortText': return shortTextInput.test(data)
     case 'color': return colorInput.test(data)
     case 'heading': return nameInput.test(data)
+    case 'email': return emailInput.test(data)
     default: return longTextInput.test(data)
   }
 }
