@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 const styles = theme => ({
   root: {
@@ -27,10 +28,14 @@ const styles = theme => ({
     minWidth: 0,
   },
   toolbar: theme.mixins.toolbar,
+  accountIcon: {
+    marginRight: '7px'
+  },
   title: {
   },
   logoutBtn: {
-    marginRight: '50px'
+    marginRight: '50px',
+    marginLeft: '20px'
   },
   drawer: {
     marginLeft: '50px'
@@ -60,7 +65,13 @@ class App extends React.Component {
                 <Typography variant="title" color="inherit" noWrap className={classes.title}>
                   Tshop admin
                 </Typography>
-                <Button variant="contained" color="secondary" onClick={this.logout} className={classes.logoutBtn}>Logout</Button>
+                <span>
+                  <Grid container alignItems="center" justify="center">
+                    <AccountCircleIcon className={classes.accountIcon}/>
+                    <Typography color="inherit" variant="subheading">{localStorage.getItem('user')}</Typography>
+                    <Button variant="contained" color="secondary" onClick={this.logout} className={classes.logoutBtn}>Logout</Button>
+                  </Grid>
+                </span>
               </Grid>
             </Toolbar>
           </AppBar>

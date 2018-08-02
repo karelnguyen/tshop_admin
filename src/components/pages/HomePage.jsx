@@ -1,6 +1,7 @@
 import React from 'react'
 import AddProductPage from './AddProductPage'
 import ProductCatalogPage from './ProductCatalogPage'
+import SettingsPage from './SettingsPage'
 // Material-ui
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
@@ -71,7 +72,7 @@ function Home (props) {
           <Typography variant="headline" >Nastavení</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          Zatim neco
+          <SettingsPage />
         </ExpansionPanelDetails>
       </ExpansionPanel>
 

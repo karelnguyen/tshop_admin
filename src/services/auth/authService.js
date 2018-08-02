@@ -9,7 +9,9 @@ function login (username, password) {
     data: {'email': username, 'password': password}
   })
   .then(response => {
+    console.log(response)
     localStorage.setItem('token', response.data.good.token)
+    localStorage.setItem('user', response.data.username)
     window.location.reload()
   })
 }
