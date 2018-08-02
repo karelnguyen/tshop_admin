@@ -1,6 +1,6 @@
 const priceInput = new RegExp(/^[0-9]{1,10}$/)
 const longTextInput = new RegExp(/^.{1,500}$/)
-const nameInput = new RegExp(/^.{1,30}$/)
+const nameInput = new RegExp(/^.{1,50}$/)
 const shortTextInput = new RegExp(/^.{1,150}$/)
 const colorInput = new RegExp(/^[a-zA-Z]{1,30}$/)
 const emailInput = new RegExp(/\S+@\S+\.\S+/)

@@ -86,10 +86,11 @@ class UpdateProductDialog extends React.Component {
 
   updateProduct (id) {
     let data = this.state.input
-    return ProductsService
+    ProductsService
       .update(id, data)
       .then(() => {
-        window.history.reload()
+        this.setState({ open: false })
+        this.props.rerenderProducts()
       })
   }
 

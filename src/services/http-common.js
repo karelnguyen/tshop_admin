@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const client = axios.create({ baseURL: 'https://sheltered-caverns-10503.herokuapp.com/' })
+const client = axios.create({ baseURL: 'https://mladejvlcak.herokuapp.com/' })
 // const client = axios.create({ baseURL: 'http://localhost:3001/' })
 
 // client.defaults.headers['Access-Control-Allow-Origin'] = '*'

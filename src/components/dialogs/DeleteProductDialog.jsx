@@ -34,9 +34,6 @@ class UpdateProductDialog extends React.Component {
       .then(() => {
         window.location.reload()
       })
-      .catch(err => {
-        console.log('ERR!', err)
-      })
   }
 
   render () {

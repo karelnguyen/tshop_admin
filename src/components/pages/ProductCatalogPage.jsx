@@ -4,8 +4,12 @@ import ProductsTable from '../tables/ProductsTable'
 import Grid from '@material-ui/core/Grid'
 
 class ProductCatalog extends React.Component {
-  state = {
-    products: []
+  constructor() {
+    super()
+    this.getAllProducts = this.getAllProducts.bind(this)
+    this.state = {
+      products: []
+    }
   }
 
   getAllProducts () {
@@ -13,9 +17,6 @@ class ProductCatalog extends React.Component {
       .getAll()
       .then(response => {
         this.setState({ products: response.data })
-      })
-      .catch(err => {
-        console.error('Err!', err)
       })
   }
 
@@ -27,7 +28,7 @@ class ProductCatalog extends React.Component {
     const { products } = this.state
     return (
       <Grid container justify="center">
-        <ProductsTable tableData={products}/>
+        <ProductsTable tableData={products} rerenderProducts={this.getAllProducts}/>
       </Grid>
     )
   }

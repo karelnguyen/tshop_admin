@@ -41,6 +41,9 @@ const styles = theme => ({
   updateBtn: {
     marginLeft: '10px',
     marginRight: '10px'
+  },
+  btnWrapper: {
+    minWidth: '190px'
   }
 })
 
@@ -111,7 +114,7 @@ class ProductsTable extends React.Component {
     const { rowsPerPage, page, selected } = this.state
     const data = this.props.tableData
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
-    const { classes } = this.props
+    const { classes, rerenderProducts } = this.props
     return (
       <Paper className={classes.paper}>
           {data.length === 0
@@ -173,12 +176,12 @@ class ProductsTable extends React.Component {
                            <TableCell>{item.price}</TableCell>
                            <TableCell>{item.color}</TableCell>
                            <TableCell>
-                             <Grid container direction="row">
-                               <ProductDetailDialog id={item.id}/>
+                             <Grid container direction="row" className={classes.btnWrapper}>
+                               <ProductDetailDialog id={item.id} rerenderProducts={rerenderProducts}/>
                                <span className={classes.updateBtn}>
-                                 <UpdateProductDialog tableData={item}/>
+                                 <UpdateProductDialog tableData={item} rerenderProducts={rerenderProducts}/>
                                </span>
-                               <DeleteProductDialog tableData={item}/>
+                               <DeleteProductDialog tableData={item} rerenderProducts={rerenderProducts}/>
                              </Grid>
                            </TableCell>
                          </TableRow>

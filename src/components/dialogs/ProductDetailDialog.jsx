@@ -55,9 +55,13 @@ function Transition(props) {
 }
 
 class ProductDetailDialog extends React.Component {
-  state = {
-    productDetailBool: false,
-    productDetails: {}
+  constructor () {
+    super ()
+    this.getProductDetails = this.getProductDetails.bind(this)
+    this.state = {
+      productDetailBool: false,
+      productDetails: {}
+    }
   }
 
   showProductDetail () {
@@ -108,8 +112,8 @@ class ProductDetailDialog extends React.Component {
                     </Button>
                     <Grid item>
                       <Grid container spacing={8}>
-                        <Grid item><UpdateProductDialog tableData={productDetails} /></Grid>
-                        <Grid item><DeleteProductDialog tableData={productDetails} /></Grid>
+                        <Grid item><UpdateProductDialog tableData={productDetails} rerenderProducts={this.getProductDetails}/></Grid>
+                        <Grid item><DeleteProductDialog tableData={productDetails} rerenderProducts={this.getProductDetails}/></Grid>
                       </Grid>
                     </Grid>
                   </Grid>

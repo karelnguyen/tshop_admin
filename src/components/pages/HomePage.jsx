@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ProductsIcon from '@material-ui/icons/LibraryBooks'
 import ProductAddIcon from '@material-ui/icons/LibraryAdd'
+import SettingsIcon from '@material-ui/icons/Settings'
+
 // import amber from '@material-ui/core/colors/amber'
 
 // Custom UI theme
@@ -60,6 +62,16 @@ function Home (props) {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <AddProductPage className={classes.AddProductPage}/>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+
+      <ExpansionPanel className={classes.expanel}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <SettingsIcon  className={classes.icons}/>
+          <Typography variant="headline" >Nastavení</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          Zatim neco
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
