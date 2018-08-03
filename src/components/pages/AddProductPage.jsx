@@ -76,7 +76,7 @@ class AddProductPage extends React.Component {
   }
 
   getAllProducts () {
-    return ProductsService
+    ProductsService
       .getAll()
       .then(response => {
         this.setState({ allProducts: response.data })
@@ -95,7 +95,7 @@ class AddProductPage extends React.Component {
     let id = isFinite(Math.max(...idArr) + 1) ? Math.max(...idArr) + 1 : 1
     data['id'] = id
 
-    return ProductsService
+    ProductsService
       .add(data)
       .then(() => {
         window.location.reload()

@@ -44,7 +44,7 @@ class LoginPage extends React.Component {
         password: false,
       },
       inputErrors: {},
-      showLoginButton: true,
+      disabledLoginBtn: true,
       showLoginErrorBar: false,
     }
   }
@@ -76,9 +76,9 @@ class LoginPage extends React.Component {
 
     anomalyObj.map(x => x === false ? anomaly = false : null)
     if (anomaly === true) {
-      this.setState({ showLoginButton: false })
+      this.setState({ disabledLoginBtn: false })
     } else {
-      this.setState({ showLoginButton: true })
+      this.setState({ disabledLoginBtn: true })
     }
   }
 
@@ -108,28 +108,34 @@ class LoginPage extends React.Component {
         <Grid item xs={10} sm={6} md={4} lg={3}>
           <Paper className={classes.paper}>
             <Grid container direction="column" className={classes.gridContainer} alignItems="center" justify="center">
-                <TextField
-                  id="email"
-                  placeholder="email"
-                  required={true}
-                  className={classes.textfield}
-                  onChange={this.handleChange}
-                  error={this.state.inputErrors.email}
-                  />
-                <TextField
-                  id="password"
-                  type="password"
-                  onChange={this.handleChange}
-                  placeholder="password"
-                  required={true}
-                  className={classes.textfield}
-                  error={this.state.inputErrors.password}
-                  />
-                <Button color="primary" variant="contained"
-                  className={classes.loginBtn}
-                  onClick={this.login}
-                  disabled={this.state.showLoginButton}
-                  >Login</Button>
+              <form>
+                <Grid container alignItems="center" justify="center">
+                  <TextField
+                    id="email"
+                    autoComplete="email"
+                    placeholder="email"
+                    required={true}
+                    className={classes.textfield}
+                    onChange={this.handleChange}
+                    error={this.state.inputErrors.email}
+                    />
+                  <TextField
+                    autoComplete="off"
+                    id="password"
+                    type="password"
+                    onChange={this.handleChange}
+                    placeholder="password"
+                    required={true}
+                    className={classes.textfield}
+                    error={this.state.inputErrors.password}
+                    />
+                </Grid>
+              </form>
+              <Button color="primary" variant="contained"
+                className={classes.loginBtn}
+                onClick={this.login}
+                disabled={this.state.disabledLoginBtn}
+                >Login</Button>
             </Grid>
           </Paper>
         </Grid>

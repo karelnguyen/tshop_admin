@@ -1,15 +1,15 @@
 import React from "react"
-// Material-ui
-import SnackbarContent from '@material-ui/core/SnackbarContent'
 import CloseIcon from "@material-ui/icons/Close"
 import Snackbar from "@material-ui/core/Snackbar"
 import IconButton from '@material-ui/core/IconButton'
 import { withStyles } from '@material-ui/core/styles'
-import ErrorIcon from '@material-ui/icons/Error'
+import SnackbarContent from '@material-ui/core/SnackbarContent'
+import DoneIcon from '@material-ui/icons/Done'
+import green from '@material-ui/core/colors/green'
 
 const styles = theme => ({
   snack: {
-    backgroundColor: theme.palette.error.dark
+    backgroundColor: green[600]
   },
   message: {
     display: 'flex',
@@ -20,7 +20,7 @@ const styles = theme => ({
   }
 })
 
-class LoginErrorBar extends React.Component {
+class UserAddedBar extends React.Component {
   render() {
     const { open, closeFn, classes } = this.props
 
@@ -37,7 +37,7 @@ class LoginErrorBar extends React.Component {
         onClose={() => {closeFn()}}
         message={
           <span id="message-id" className={classes.message}>
-            <ErrorIcon className={classes.iconError}/><span>Bad username or password</span>
+            <DoneIcon className={classes.iconError}/><span>Adding user completed!</span>
           </span>
         }
         action={[
@@ -56,4 +56,4 @@ class LoginErrorBar extends React.Component {
   }
 }
 
-export default withStyles(styles)(LoginErrorBar)
+export default withStyles(styles)(UserAddedBar)

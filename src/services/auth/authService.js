@@ -9,10 +9,17 @@ function login (username, password) {
     data: {'email': username, 'password': password}
   })
   .then(response => {
-    console.log(response)
     localStorage.setItem('token', response.data.good.token)
     localStorage.setItem('user', response.data.username)
     window.location.reload()
+  })
+}
+
+function signUp (username, password) {
+  return request({
+    url: 'user/signup',
+    method: 'POST',
+    data: {'email': username, 'password': password}
   })
 }
 
@@ -33,6 +40,7 @@ const AuthService = {
   login,
   logout,
   isAuthenticated,
+  signUp,
 }
 
 export default AuthService

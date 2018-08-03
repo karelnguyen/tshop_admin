@@ -32,6 +32,7 @@ const styles = theme => ({
     marginRight: '7px'
   },
   title: {
+    marginLeft: '150px'
   },
   logoutBtn: {
     marginRight: '50px',
