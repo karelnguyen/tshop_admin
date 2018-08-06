@@ -162,9 +162,7 @@ class ProductsTable extends React.Component {
                      .map(item => {
                        const isSelected = this.isSelected(item.id)
                        return (
-                         <TableRow
-                          key={item.id}
-                          >
+                         <TableRow key={item.id}>
                            <TableCell padding="checkbox">
                              <Checkbox
                                onClick={event => this.handleClick(event, item.id)}
@@ -193,18 +191,18 @@ class ProductsTable extends React.Component {
                        </TableRow>
                    )}
                  </TableBody>
-                   <TableFooter>
-                     <TableRow>
-                       <TablePagination
-                         count={data.length}
-                         page={page}
-                         rowsPerPage={rowsPerPage}
-                         onChangePage={this.handleChangePage.bind(this)}
-                         onChangeRowsPerPage={this.handleChangeRowsPerPage.bind(this)}
-                         ActionsComponent={TablePaginationActionsWrapped}
-                         />
-                     </TableRow>
-                   </TableFooter>
+                 <TableFooter>
+                   <TableRow>
+                     <TablePagination
+                       count={data.length}
+                       page={page}
+                       rowsPerPage={rowsPerPage}
+                       onChangePage={this.handleChangePage.bind(this)}
+                       onChangeRowsPerPage={this.handleChangeRowsPerPage.bind(this)}
+                       ActionsComponent={TablePaginationActionsWrapped}
+                       />
+                   </TableRow>
+                 </TableFooter>
                </Table>
         </Grid>
       }

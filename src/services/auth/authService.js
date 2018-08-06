@@ -9,8 +9,10 @@ function login (username, password) {
     data: {'email': username, 'password': password}
   })
   .then(response => {
-    localStorage.setItem('token', response.data.good.token)
-    localStorage.setItem('user', response.data.username)
+    const token = response.data.good.token
+    localStorage.setItem('token', token)
+    localStorage.setItem('user', response.data.email)
+    localStorage.setItem('id', response.data.id)
     window.location.reload()
   })
 }
@@ -24,7 +26,7 @@ function signUp (username, password) {
 }
 
 function logout () {
-  localStorage.removeItem('token')
+  localStorage.clear()
   window.location.reload()
 }
 

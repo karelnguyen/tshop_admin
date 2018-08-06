@@ -23,7 +23,7 @@ const styles = theme => ({
   content: {
     overflowY: 'scroll',
     flexGrow: 1,
-    backgroundColor: '#343434',
+    backgroundColor: '#dce0f7',
     padding: theme.spacing.unit * 3,
     minWidth: 0,
   },

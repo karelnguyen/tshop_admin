@@ -8,7 +8,7 @@ import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
-import MenuIcon from '@material-ui/icons/Menu'
+import MenuIcon from '@material-ui/icons/Dashboard'
 
 
 const drawerWidth = 240

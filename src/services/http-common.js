@@ -3,14 +3,10 @@ import axios from 'axios'
 const client = axios.create({ baseURL: 'https://mladejvlcak.herokuapp.com/' })
 // const client = axios.create({ baseURL: 'http://localhost:3001/' })
 
-// client.defaults.headers['Access-Control-Allow-Origin'] = '*'
-
-const setHeaderToken = (token) => {
-  client.defaults.headers.common['Authorization'] = 'Bearer ' + token
-}
-
 // Request Wrapper
 const request = (options) => {
+  const token = localStorage.getItem('token')
+  client.defaults.headers.common['Authorization'] = token
 
   const onSuccess = (response) => {
     // console.log('Request OK, request data:', response.data)
@@ -30,7 +26,6 @@ const request = (options) => {
 const httpCommon = {
   client,
   request,
-  setHeaderToken,
 }
 
 export default httpCommon
