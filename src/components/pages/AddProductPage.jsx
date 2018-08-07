@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductsService from '../../services/api/products'
 import Validator from '../../mixins/validation'
+import AddProductBar from '../snackbars/AddProductBar'
 // Material-ui
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
@@ -28,8 +29,6 @@ const styles = theme => ({
   btn: {
     width: '70px',
     height: '70px',
-    marginTop: '20px',
-    marginLeft: '100px',
   },
   sizeLabel: {
     width: '50px',
@@ -58,10 +57,18 @@ class AddProductPage extends React.Component {
     super()
     this.saveInputData = this.saveInputData.bind(this)
     this.addProduct = this.addProduct.bind(this)
-
+    this.saveFile = this.saveFile.bind(this)
+    this.closeBars = this.closeBars.bind(this)
     this.state = {
       allProducts: [],
-      input: {},
+      input: {
+        color: '',
+        heading: '',
+        longText: '',
+        price: '',
+        shortText: '',
+      },
+      image: null,
       validation: {
         heading: false,
         shortText: false,
@@ -70,35 +77,64 @@ class AddProductPage extends React.Component {
         price: false,
       },
       size: '',
-      showAddButtonBool: true,
+      disabledAddBtn: true,
       inputErrors: {},
+      showBar: false,
     }
   }
 
   getAllProducts () {
-    ProductsService
+    return ProductsService
       .getAll()
       .then(response => {
         this.setState({ allProducts: response.data })
       })
   }
 
+  fileUpload (file) {
+    const data = new FormData()
+    data.append('files', file)
+    ProductsService
+      .uploadFile(data)
+  }
+
   async addProduct () {
     await this.getAllProducts()
-
+    let allProducts = this.state.allProducts
     let idArr = []
     let data = this.state.input
-
-    // Creating product id
-    this.state.allProducts.map( x => x.hasOwnProperty('id') ? idArr.push(x.id) : x )
-    idArr = idArr.map(id => Number(id))
-    let id = isFinite(Math.max(...idArr) + 1) ? Math.max(...idArr) + 1 : 1
-    data['id'] = id
-
+    const image = this.state.image
+    // creating unique id
+    if (image !== null) {
+      this.fileUpload(image)
+      data['img'] = image.name
+    }
+    allProducts.map( x => x.hasOwnProperty('id') ? idArr.push(x.id) : x )
+    if (idArr.length === 0) {
+      data['id'] = 1
+    } else {
+      let id = Math.max(...idArr) + 1
+      data['id'] = id
+    }
     ProductsService
       .add(data)
       .then(() => {
-        window.location.reload()
+        this.setState({
+          input: {
+            color: '',
+            heading: '',
+            longText: '',
+            price: '',
+            shortText: '',
+          },
+          size: '',
+          inputErrors: {},
+          validation: {},
+          disabledAddBtn: true,
+          image: null,
+          showBar: true,
+        })
+        this.refs.file.value = null
       })
   }
 
@@ -132,9 +168,9 @@ class AddProductPage extends React.Component {
 
     anomalyObj.map(x => x === false ? anomaly = false : null)
     if (anomaly === true) {
-      this.setState({ showAddButtonBool: false })
+      this.setState({ disabledAddBtn: false })
     } else {
-      this.setState({ showAddButtonBool: true })
+      this.setState({ disabledAddBtn: true })
     }
   }
 
@@ -144,7 +180,22 @@ class AddProductPage extends React.Component {
     data['size'] = event.target.value
   }
 
+  saveFile (event) {
+    this.setState({ image: event.target.files[0] })
+  }
+
+  closeBars (event, reason) {
+    if (reason === 'clickaway') {
+      return
+    }
+    this.setState({
+      showBar: false,
+     })
+  }
+
   render () {
+    // console.log(this.state)
+    const { input } = this.state
     const { classes } = this.props
     return (
       <div className={classes.root}>
@@ -163,7 +214,7 @@ class AddProductPage extends React.Component {
               required={true}
               multiline={true}
               error={this.state.inputErrors.heading}
-              value={this.state.input.heading}
+              value={input.heading}
             />
             <TextField
               id="size"
@@ -191,6 +242,7 @@ class AddProductPage extends React.Component {
               multiline={true}
               required={true}
               error={this.state.inputErrors.shortText}
+              value={input.shortText}
             />
             <TextField
               id="longText"
@@ -203,6 +255,7 @@ class AddProductPage extends React.Component {
               multiline={true}
               required={true}
               error={this.state.inputErrors.longText}
+              value={input.longText}
             />
             <TextField
               id="color"
@@ -213,15 +266,7 @@ class AddProductPage extends React.Component {
               onChange={this.saveInputData}
               required={true}
               error={this.state.inputErrors.color}
-            />
-            <TextField
-              id="img"
-              label="img"
-              placeholder="zatim string"
-              margin="normal"
-              className={classes.input}
-              onChange={this.saveInputData}
-              required={true}
+              value={input.color}
             />
             <TextField
               id="price"
@@ -232,23 +277,36 @@ class AddProductPage extends React.Component {
               onChange={this.saveInputData}
               required={true}
               error={this.state.inputErrors.price}
+              value={input.price}
             />
-            <Tooltip id="tooltip-fab" title="Add">
-              <span>
-                <Button
-                  className={classes.btn}
-                  type="button"
-                  variant="fab"
-                  color="primary"
-                  aria-label="Přidat"
-                  disabled={this.state.showAddButtonBool}
-                  onClick={this.addProduct}>
-                  <AddIcon/>
-                </Button>
-              </span>
-            </Tooltip>
+            <Grid container justify="space-between" alignItems="center">
+              <form>
+                <Typography color="primary" variant="body2">Vyberte obrázek</Typography>
+                <input
+                  id="image"
+                  type="file"
+                  onChange={this.saveFile}
+                  ref="file"
+                  ></input>
+              </form>
+              <Tooltip id="tooltip-fab" title="Add">
+                <span>
+                  <Button
+                    className={classes.btn}
+                    type="button"
+                    variant="fab"
+                    color="primary"
+                    aria-label="Přidat"
+                    disabled={this.state.disabledAddBtn}
+                    onClick={this.addProduct}>
+                    <AddIcon/>
+                  </Button>
+                </span>
+              </Tooltip>
+            </Grid>
           </Paper>
         </Grid>
+        <AddProductBar open={this.state.showBar} closeFn={this.closeBars}/>
       </div>
     )
   }

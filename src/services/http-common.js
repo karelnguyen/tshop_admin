@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 const client = axios.create({ baseURL: 'https://mladejvlcak.herokuapp.com/' })
+const token = localStorage.getItem('token')
 // const client = axios.create({ baseURL: 'http://localhost:3001/' })
 
 // Request Wrapper
 const request = (options) => {
-  const token = localStorage.getItem('token')
   client.defaults.headers.common['Authorization'] = token
 
   const onSuccess = (response) => {

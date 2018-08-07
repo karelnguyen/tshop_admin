@@ -120,7 +120,7 @@ class SignUpPage extends React.Component {
 
   render () {
     const { classes } = this.props
-    const { inputErrors, disabledSignUpBtn, email, password, passwordCheck, showSignUpErrorBar, showUserAddedBar } = this.state
+    const { inputErrors, disabledSignUpBtn, showSignUpErrorBar, showUserAddedBar } = this.state
     return (
       <div className={classes.root}>
         <Paper>
@@ -135,7 +135,6 @@ class SignUpPage extends React.Component {
                   className={classes.textfield}
                   onChange={this.saveInput}
                   error={inputErrors.email}
-                  value={email}
                   >
                 </TextField>
                 <TextField
@@ -146,7 +145,6 @@ class SignUpPage extends React.Component {
                   className={classes.textfield}
                   onChange={this.saveInput}
                   error={inputErrors.password}
-                  value={password}
                   >
                 </TextField>
                 <TextField
@@ -157,7 +155,6 @@ class SignUpPage extends React.Component {
                   className={classes.textfield}
                   onChange={this.saveInput}
                   error={inputErrors.passwordCheck}
-                  value={passwordCheck}
                   >
                 </TextField>
               </Grid>

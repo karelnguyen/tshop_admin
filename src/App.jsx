@@ -1,6 +1,7 @@
 import React from 'react'
 import HomePage from './components/pages/HomePage'
 import AuthService from './services/auth/authService'
+import UsersService from './services/api/users'
 import MainDrawer from './components/drawers/Drawer'
 // Material-ui
 import { withStyles } from '@material-ui/core/styles'
@@ -47,6 +48,23 @@ class App extends React.Component {
   constructor() {
     super()
     this.logout = this.logout.bind(this)
+  }
+
+  // Check if token is valid, then logout
+  isTokenExpired () {
+    UsersService
+      .getAll()
+      .then(response => {
+      })
+      .catch(err => {
+        if (err.status === 401) {
+          this.logout()
+        }
+      })
+  }
+
+  componentDidMount () {
+    this.isTokenExpired()
   }
 
   logout () {

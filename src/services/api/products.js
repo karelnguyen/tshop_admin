@@ -17,6 +17,17 @@ function add (data) {
   })
 }
 
+function uploadFile (file) {
+  return request({
+    url: `/product/upload`,
+    method: 'POST',
+    headers: {
+      'content-type': 'multipart/form-data'
+    },
+    data: file || {}
+  })
+}
+
 function getOne (id) {
   return request({
     url: `/product/one/${id}`,
@@ -52,7 +63,8 @@ const ProductsService = {
   getOne,
   getImage,
   update,
-  destroy
+  destroy,
+  uploadFile
 }
 
 export default ProductsService

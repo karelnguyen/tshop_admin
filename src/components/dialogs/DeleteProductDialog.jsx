@@ -15,7 +15,7 @@ const styles = theme => ({
 // styles
 })
 
-class UpdateProductDialog extends React.Component {
+class DeleteProductDialog extends React.Component {
   state = {
     open: false
   }
@@ -74,4 +74,4 @@ class UpdateProductDialog extends React.Component {
   }
 }
 
-export default withStyles(styles)(UpdateProductDialog)
+export default withStyles(styles)(DeleteProductDialog)

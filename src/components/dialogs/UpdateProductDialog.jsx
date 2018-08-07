@@ -2,6 +2,7 @@ import React from 'react'
 import UpdateIcon from '../../assets/border-color.png'
 import ProductsService from '../../services/api/products'
 import Validator from '../../mixins/validation'
+import UpdateProductBar from '../snackbars/UpdateProductBar'
 // Material-ui
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -30,11 +31,25 @@ const styles = theme => ({
 })
 
 class UpdateProductDialog extends React.Component {
-  state = {
-    open: false,
-    input: this.props.tableData,
-    validation: {},
-    updateBtnBool: true
+  constructor (props) {
+    super (props)
+    this.closeBars = this.closeBars.bind(this)
+    this.state = {
+      open: false,
+      input: props.tableData,
+      validation: {},
+      updateBtnBool: true,
+      showBar: false,
+    }
+  }
+
+  closeBars (event, reason) {
+    if (reason === 'clickaway') {
+      return
+    }
+    this.setState({
+      showBar: false,
+     })
   }
 
   handleClickOpen = () => {
@@ -91,6 +106,7 @@ class UpdateProductDialog extends React.Component {
       .then(() => {
         this.setState({ open: false })
         this.props.rerenderProducts()
+        this.setState({ showBar: true })
       })
   }
 
@@ -202,6 +218,7 @@ class UpdateProductDialog extends React.Component {
            </Button>
          </DialogActions>
        </Dialog>
+       <UpdateProductBar open={this.state.showBar} closeFn={this.closeBars}/>
      </div>
     )
   }

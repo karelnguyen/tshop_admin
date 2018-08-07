@@ -94,7 +94,7 @@ class ChangePasswordPage extends React.Component {
               <Grid container direction="column" justify="center" alignItems="center">
                 <TextField
                   id="password"
-                  placeholder="heslo"
+                  placeholder="nové heslo"
                   className={classes.textfield}
                   onChange={this.saveInput}
                   error={inputErrors.password}
@@ -103,7 +103,7 @@ class ChangePasswordPage extends React.Component {
                 </TextField>
                 <TextField
                   id="passwordCheck"
-                  placeholder="znova heslo"
+                  placeholder="znova nové heslo"
                   className={classes.textfield}
                   onChange={this.saveInput}
                   error={inputErrors.passwordCheck}
