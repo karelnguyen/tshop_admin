@@ -165,14 +165,6 @@ class UpdateProductDialog extends React.Component {
              fullWidth
            />
            <TextField
-             id="img"
-             margin="dense"
-             label="Img"
-             defaultValue={tableData.img}
-             onChange={this.saveInputData.bind(this)}
-             fullWidth
-           />
-           <TextField
              id="shortText"
              margin="dense"
              label="Short text"

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const client = axios.create({ baseURL: 'https://mladejvlcak.herokuapp.com/' })
+const baseURL = 'https://mladejvlcak.herokuapp.com/'
+const client = axios.create({ baseURL })
 const token = localStorage.getItem('token')
 // const client = axios.create({ baseURL: 'http://localhost:3001/' })
 
@@ -26,6 +27,7 @@ const request = (options) => {
 const httpCommon = {
   client,
   request,
+  baseURL,
 }
 
 export default httpCommon

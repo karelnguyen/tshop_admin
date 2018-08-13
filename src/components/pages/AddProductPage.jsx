@@ -104,11 +104,11 @@ class AddProductPage extends React.Component {
     let idArr = []
     let data = this.state.input
     const image = this.state.image
-    // creating unique id
     if (image !== null) {
       this.fileUpload(image)
       data['img'] = image.name
     }
+    // creating unique id
     allProducts.map( x => x.hasOwnProperty('id') ? idArr.push(x.id) : x )
     if (idArr.length === 0) {
       data['id'] = 1
@@ -135,6 +135,9 @@ class AddProductPage extends React.Component {
           showBar: true,
         })
         this.refs.file.value = null
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000)
       })
   }
 
@@ -194,7 +197,6 @@ class AddProductPage extends React.Component {
   }
 
   render () {
-    // console.log(this.state)
     const { input } = this.state
     const { classes } = this.props
     return (

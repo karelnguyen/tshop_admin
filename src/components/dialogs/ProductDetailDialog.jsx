@@ -3,6 +3,7 @@ import UpdateProductDialog from './UpdateProductDialog'
 import DeleteProductDialog from './DeleteProductDialog'
 import ProductsService from '../../services/api/products'
 import NoImgPlaceholder from '../../assets/placeholder-noimg.png'
+import httpCommon from '../../services/http-common'
 // Material-ui
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -60,17 +61,26 @@ class ProductDetailDialog extends React.Component {
     this.getProductDetails = this.getProductDetails.bind(this)
     this.state = {
       productDetailBool: false,
-      productDetails: {}
+      productDetails: {},
+      imageArray: []
     }
   }
 
-  showProductDetail () {
-    this.getProductDetails()
+  async showProductDetail () {
+    await this.getProductDetails()
+    this.state.productDetails.img.map(img => {
+      let imgArr = this.state.imageArray
+      imgArr.push(img)
+      return this.setState({ imageArray: imgArr })
+    })
     this.setState({ productDetailBool: true })
   }
 
   hideProductDetail () {
-    this.setState({ productDetailBool: false })
+    this.setState({
+      productDetailBool: false,
+      imageArray: []
+    })
   }
 
   getProductDetails () {
@@ -83,7 +93,7 @@ class ProductDetailDialog extends React.Component {
 
   render () {
     const { classes } = this.props
-    const { productDetailBool, productDetails } = this.state
+    const { productDetailBool, productDetails, imageArray } = this.state
     return (
       <div className={classes.root}>
         <Tooltip id="tooltip-fab" title="Zobrazit produkt" >
@@ -208,13 +218,30 @@ class ProductDetailDialog extends React.Component {
                         </Grid>
                       </div>
                     </Grid>
-                    <Grid item xs={5} sm={5}>
-                      <Paper className={`${classes.boxes} ${classes.imgGridWrapper}`}>
-                        <div className={classes.imgWrapper}>
-                          <img alt="placeholder img" src={NoImgPlaceholder} className={classes.placeholderImg}/>
-                        </div>
-                      </Paper>
-                    </Grid>
+                      {
+                        imageArray.length === 0
+                        ?
+                        <Grid item xs={5} sm={5}>
+                          <Paper className={`${classes.boxes} ${classes.imgGridWrapper}`}>
+                            <div className={classes.imgWrapper}>
+                              <img alt="img" src={NoImgPlaceholder} className={classes.placeholderImg}/>
+                            </div>
+                          </Paper>
+                        </Grid>
+                        :
+                        imageArray.map(img => {
+                          console.log(img)
+                          return (
+                            <Grid  key={img} item xs={5} sm={5}>
+                              <Paper className={`${classes.boxes} ${classes.imgGridWrapper}`}>
+                                <div className={classes.imgWrapper}>
+                                  <img alt="img" src={`${httpCommon.baseURL}product/image/${img}`} className={classes.placeholderImg}/>
+                                </div>
+                              </Paper>
+                            </Grid>
+                          )
+                        })
+                      }
                   </Grid>
                 </Grid>
               </Grid>
