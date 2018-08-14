@@ -84,11 +84,11 @@ class ProductDetailDialog extends React.Component {
   }
 
   getProductDetails () {
-    return ProductsService
-      .getOne(this.props.id)
-      .then(response => {
-        this.setState({ productDetails: response.data})
-      })
+    ProductsService
+      // .getOne(this.props.id)
+      // .then(response => {
+      //   this.setState({ productDetails: response.data})
+      // })
   }
 
   render () {
@@ -230,7 +230,6 @@ class ProductDetailDialog extends React.Component {
                         </Grid>
                         :
                         imageArray.map(img => {
-                          console.log(img)
                           return (
                             <Grid  key={img} item xs={5} sm={5}>
                               <Paper className={`${classes.boxes} ${classes.imgGridWrapper}`}>

@@ -1,14 +1,16 @@
 import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 
 const baseURL = 'https://mladejvlcak.herokuapp.com/'
 
 const client = axios.create({ baseURL })
 
-function setHeaderToken (token) {
+const mock = new MockAdapter(axios)
+
+const setHeaderToken = (token) => {
   client.defaults.headers.common['Authorization'] = token
 }
 
-// Request Wrapper
 const request = (options) => {
   const onSuccess = (response) => {
     return response
@@ -26,6 +28,7 @@ const httpCommon = {
   request,
   setHeaderToken,
   baseURL,
+  mock,
 }
 
 export default httpCommon

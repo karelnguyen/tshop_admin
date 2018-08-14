@@ -2,7 +2,7 @@ import React from 'react'
 import HomePage from './components/pages/HomePage'
 import AuthService from './services/auth/authService'
 import UsersService from './services/api/users'
-import MainDrawer from './components/drawers/Drawer'
+// import MainDrawer from './components/drawers/Drawer'
 // Material-ui
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -80,7 +80,6 @@ class App extends React.Component {
           <AppBar position="absolute" className={classes.appBar}>
             <Toolbar>
               <Grid container justify="space-between" alignItems="center">
-                <MainDrawer className={classes.drawer}/>
                 <Typography variant="title" color="inherit" noWrap className={classes.title}>
                   Tshop admin
                 </Typography>

@@ -16,11 +16,14 @@ const styles = theme => ({
 })
 
 class DeleteProductDialog extends React.Component {
-  state = {
-    open: false
+  constructor () {
+    super ()
+    this.state = {
+      open: false
+    }
   }
 
-  handleClickOpen = () => {
+  handleClickOpen () {
     this.setState({ open: true })
   }
 

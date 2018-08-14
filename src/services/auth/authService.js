@@ -7,8 +7,7 @@ function login (username, password) {
     url: '/user/signin',
     method: 'POST',
     data: {'email': username, 'password': password}
-  })
-  .then(response => {
+  }).then(response => {
     const token = response.data.good.token
     localStorage.setItem('token', token)
     localStorage.setItem('user', response.data.email)
