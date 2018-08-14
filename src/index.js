@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import httpCommon from './services/http-common'
 import App from './App'
 import LoginPage from './components/pages/LoginPage'
 import AuthService from './services/auth/authService'
@@ -13,6 +14,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       : <Redirect to='/login' />
     )} />
 )
+
+httpCommon.setHeaderToken(localStorage.getItem('token'))
 
 ReactDOM.render(
   <Router>
