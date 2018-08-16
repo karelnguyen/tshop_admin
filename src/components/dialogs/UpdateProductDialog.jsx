@@ -79,7 +79,6 @@ class UpdateProductDialog extends React.Component {
     return this.toggleAddButton()
   }
 
-
   toggleAddButton () {
     const data = this.state.validation
     let toggleAddButtonBool = true

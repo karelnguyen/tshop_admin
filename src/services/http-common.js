@@ -5,7 +5,12 @@ const baseURL = 'https://mladejvlcak.herokuapp.com/'
 
 const client = axios.create({ baseURL })
 
-const mock = new MockAdapter(axios)
+let mock = new MockAdapter(client, { delayResponse: 500 })
+if (process.env.NODE_ENV !== 'test') {
+  mock.restore()
+} else {
+  mock = new MockAdapter(client)
+}
 
 const setHeaderToken = (token) => {
   client.defaults.headers.common['Authorization'] = token

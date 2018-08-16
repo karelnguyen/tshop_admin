@@ -1,26 +1,27 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import httpCommon from '../../../services/http-common'
 import ProductDetailDialog from '../ProductDetailDialog'
+import productDetails from '../../../__mocks__/productDetails'
 
 describe('ProductDetailDialog methods:', () => {
   // .dive, because there is a HOC, more HOC need more .dive
+  const mock = httpCommon.mock
   const wrapper = shallow(<ProductDetailDialog />).dive()
-  const fn = wrapper.instance()
+  const wi = wrapper.instance()
 
-  it('test get product detail & show product detail', async () => {
-    const imgArr = {
-      img: ['image']
-    }
-    wrapper.setState({ productDetails: imgArr })
+  it('Test get product detail & show product detail', async () => {
+    mock.onGet('/product/one/10').reply(200, productDetails)
     wrapper.setProps({ id: 10 })
-    await fn.showProductDetail()
-    expect(wrapper.state('imageArray')).toEqual(['image'])
+    await wi.showProductDetail()
+    expect(wrapper.state('productDetails')).toEqual(productDetails)
     expect(wrapper.state('productDetailBool')).toBe(true)
+    expect(wrapper.state('imageArray')).toEqual(['migos.png'])
   })
 
-  it('test hide product detail', () => {
+  it('Test hide product detail', () => {
     wrapper.setState({ productDetailBool: true })
-    fn.hideProductDetail()
+    wi.hideProductDetail()
     expect(wrapper.state('productDetailBool')).toBe(false)
     expect(wrapper.state('imageArray')).toEqual([])
   })

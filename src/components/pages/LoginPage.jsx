@@ -83,7 +83,7 @@ class LoginPage extends React.Component {
   }
 
   login () {
-    AuthService
+    return AuthService
       .login(this.state.email, this.state.password)
       .catch(() => {
         this.setState({ showLoginErrorBar: true })

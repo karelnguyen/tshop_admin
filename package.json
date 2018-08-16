@@ -62,6 +62,9 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["json", "html", "lcov"],
+    "collectCoverage": true,
     "setupTestFrameworkScriptFile": "<rootDir>/config/jest/enzymeSetup.js",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"

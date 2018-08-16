@@ -84,11 +84,13 @@ class ProductDetailDialog extends React.Component {
   }
 
   getProductDetails () {
-    ProductsService
-      // .getOne(this.props.id)
-      // .then(response => {
-      //   this.setState({ productDetails: response.data})
-      // })
+    return ProductsService
+      .getOne(this.props.id)
+      .then(response => {
+        this.setState({ productDetails: response.data})
+      })
+      .catch(err => {
+      })
   }
 
   render () {
