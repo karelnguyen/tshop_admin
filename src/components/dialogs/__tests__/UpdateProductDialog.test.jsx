@@ -41,4 +41,8 @@ describe('UpdateProductDialog methods:', () => {
     expect(wrapper.state('validation')).toEqual({"id": false})
     expect(wrapper.state('updateBtnBool')).toEqual(false)
   })
+
+  it('Test updateProduct()', () => {
+    mock.onPut(`/product/update/12`, {})
+  })
 })
