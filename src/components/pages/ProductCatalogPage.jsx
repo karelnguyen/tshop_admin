@@ -18,6 +18,7 @@ class ProductCatalog extends React.Component {
       .then(response => {
         this.setState({ products: response.data })
       })
+      .catch(err => {})
   }
 
   componentDidMount () {

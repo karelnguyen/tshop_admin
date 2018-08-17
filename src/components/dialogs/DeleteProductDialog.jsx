@@ -27,7 +27,7 @@ class DeleteProductDialog extends React.Component {
     this.setState({ open: true })
   }
 
-  handleClose = () => {
+  handleClose () {
     this.setState({ open: false })
   }
 
@@ -37,6 +37,7 @@ class DeleteProductDialog extends React.Component {
       .then(() => {
         window.location.reload()
       })
+      .catch(err => {})
   }
 
   render () {

@@ -37,7 +37,7 @@ const styles = theme => ({
 
 class SignUpPage extends React.Component {
   constructor () {
-    super()
+    super ()
     this.saveInput = this.saveInput.bind(this)
     this.signUp = this.signUp.bind(this)
     this.closeBars = this.closeBars.bind(this)
@@ -92,7 +92,7 @@ class SignUpPage extends React.Component {
   }
 
   signUp () {
-    AuthService
+    return AuthService
       .signUp(this.state.email, this.state.password)
       .then(() => {
         this.setState({

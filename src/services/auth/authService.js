@@ -18,7 +18,7 @@ function login (username, password) {
 
 function signUp (username, password) {
   return request({
-    url: 'user/signup',
+    url: '/user/signup',
     method: 'POST',
     data: {'email': username, 'password': password}
   })

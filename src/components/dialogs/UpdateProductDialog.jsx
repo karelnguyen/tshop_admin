@@ -36,11 +36,15 @@ class UpdateProductDialog extends React.Component {
     this.closeBars = this.closeBars.bind(this)
     this.state = {
       open: false,
-      input: props.tableData,
+      input: {},
       validation: {},
       updateBtnBool: true,
       showBar: false,
     }
+  }
+
+  componentWillMount () {
+    this.setState({ input: this.props.tableData })
   }
 
   closeBars (event, reason) {
@@ -100,13 +104,14 @@ class UpdateProductDialog extends React.Component {
 
   updateProduct (id) {
     let data = this.state.input
-    ProductsService
+    return ProductsService
       .update(id, data)
       .then(() => {
         this.setState({ open: false })
-        this.props.rerenderProducts()
         this.setState({ showBar: true })
+        this.props.rerenderProducts()
       })
+      .catch(err => {})
   }
 
   render () {

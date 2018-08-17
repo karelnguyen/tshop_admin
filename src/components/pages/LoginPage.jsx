@@ -37,7 +37,6 @@ class LoginPage extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.login = this.login.bind(this)
     this.closeLoginErrorBar = this.closeLoginErrorBar.bind(this)
-
     this.state = {
       validation: {
         email: false,

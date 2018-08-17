@@ -31,11 +31,12 @@ class UsersTable extends React.Component {
   }
 
   getAllUsers () {
-    UsersService
+    return UsersService
       .getAll()
       .then(response => {
         this.setState({ allUsers: response.data })
       })
+      .catch(err => {})
   }
 
   componentDidMount () {

@@ -52,7 +52,6 @@ class ProductsTable extends React.Component {
     page: 0,
     rowsPerPage: 5,
     selected: [],
-    tableData: this.props.tableData,
     productDetailBool: false
   }
 
@@ -105,8 +104,9 @@ class ProductsTable extends React.Component {
           iterCounter++
           if (iterCounter === data.length) {
             window.location.reload()
-        }
-      })
+          }
+        })
+        .catch(err => {})
     })
   }
 

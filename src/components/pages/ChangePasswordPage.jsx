@@ -74,11 +74,12 @@ class ChangePasswordPage extends React.Component {
   }
 
   changePassword () {
-    UsersService
+    return UsersService
       .changePassword(this.state.password)
       .then(() => {
         AuthService.logout()
       })
+      .catch(err => {})
   }
 
   render () {

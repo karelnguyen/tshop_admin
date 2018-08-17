@@ -42,7 +42,10 @@ describe('UpdateProductDialog methods:', () => {
     expect(wrapper.state('updateBtnBool')).toEqual(false)
   })
 
-  it('Test updateProduct()', () => {
-    mock.onPut(`/product/update/12`, {})
+  it('Test updateProduct()', async () => {
+    mock.onPut(`/product/update/12`).reply(200)
+    await wi.updateProduct(12)
+    expect(wrapper.state('open')).toEqual(false)
+    expect(wrapper.state('showBar')).toEqual(true)
   })
 })

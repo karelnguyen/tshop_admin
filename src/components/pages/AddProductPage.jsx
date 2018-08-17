@@ -89,13 +89,17 @@ class AddProductPage extends React.Component {
       .then(response => {
         this.setState({ allProducts: response.data })
       })
+      .catch(err => {
+        console.log(err.status)
+      })
   }
 
   fileUpload (file) {
     const data = new FormData()
     data.append('files', file)
-    ProductsService
+    return ProductsService
       .uploadFile(data)
+      .catch(err => {})
   }
 
   async addProduct () {
@@ -116,7 +120,8 @@ class AddProductPage extends React.Component {
       let id = Math.max(...idArr) + 1
       data['id'] = id
     }
-    ProductsService
+
+    return ProductsService
       .add(data)
       .then(() => {
         this.setState({
@@ -139,6 +144,7 @@ class AddProductPage extends React.Component {
           window.location.reload()
         }, 2000)
       })
+      .catch(err => {})
   }
 
   saveInputData (event) {

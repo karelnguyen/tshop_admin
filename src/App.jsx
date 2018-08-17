@@ -52,10 +52,8 @@ class App extends React.Component {
 
   // Check if token is valid, then logout
   isTokenExpired () {
-    UsersService
+    return UsersService
       .getAll()
-      .then(response => {
-      })
       .catch(err => {
         if (err.status === 401) {
           this.logout()
@@ -63,12 +61,12 @@ class App extends React.Component {
       })
   }
 
-  componentWillMount () {
-    this.isTokenExpired()
+  async componentWillMount () {
+    await this.isTokenExpired()
   }
 
   logout () {
-    AuthService
+    return AuthService
       .logout()
   }
 
