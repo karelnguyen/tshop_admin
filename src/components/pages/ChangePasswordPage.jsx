@@ -15,8 +15,8 @@ const styles = theme => ({
     margin: '30px'
   },
   textfield: {
-    width: '110%',
-    margin: '15px'
+    width: '280px',
+    margin: '20px'
   },
   btn: {
     margin: '30px'

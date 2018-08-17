@@ -23,8 +23,8 @@ const styles = theme => ({
 
   },
   textfield: {
-    width: '110%',
-    margin: '15px'
+    width: '280px',
+    margin: '20px'
   },
   registerBtn: {
     margin: '30px'
