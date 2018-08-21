@@ -18,6 +18,8 @@ const styles = theme => ({
 class DeleteProductDialog extends React.Component {
   constructor () {
     super ()
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
     this.state = {
       open: false
     }
